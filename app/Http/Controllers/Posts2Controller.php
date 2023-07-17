@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Posts2;
 use Illuminate\Http\Request;
 use App\Services\ImageUpload;
@@ -10,6 +11,7 @@ class Posts2Controller extends Controller
 {
     public function index()
     {
+        $data['categories'] = Category::orderBy('id','desc')->paginate(5);
         $data['posts2s'] = Posts2::orderBy('id','desc')->paginate(5);
         return view('posts2.index',$data);
     }
@@ -19,7 +21,8 @@ class Posts2Controller extends Controller
      */
     public function create()
     {
-        return view('posts2.create');
+        //$categories = Category::latest()->get();
+        return view('posts2.create',compact('categories'));
     }
 
     public function store(Request $request)
@@ -55,7 +58,8 @@ class Posts2Controller extends Controller
 
     public function edit(Posts2 $posts2)
     {
-        return view('posts2.edit',compact('posts2'));
+        //$categories = Category::latest()->get();
+        return view('posts2.edit',compact('posts2','categories'));
     }
 
     public function update(Request $request, $id)

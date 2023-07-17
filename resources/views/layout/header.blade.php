@@ -1,6 +1,7 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
@@ -58,7 +59,7 @@
                                         <span class="quantity">1</span>
                                         <div class="mess-dropdown js-dropdown">
                                             <div class="mess__title">
-                                                <p>You have 2 news message</p>
+                                                <p>You have 2 news message</p> 
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">

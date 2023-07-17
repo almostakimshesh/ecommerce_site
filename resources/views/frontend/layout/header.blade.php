@@ -1,3 +1,7 @@
+
+@php
+   $categories = category();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -81,15 +85,76 @@
                      <a href="/jewellery">Jewellery</a>
                   </div>
                   <span class="toggle_icon" onclick="openNav()"><img src="{{asset('frontend/images/toggle-icon.png')}}"></span>
-                  <div class="dropdown">
+                  
+<div>
+	<select name="categories" id="">catagory
+	   <option value="">catagory</option>
+	   @foreach($categories as $key=>$value)
+	   <option value="{{$key}}">{{$value->categoryname}}</option>
+	   @endforeach
+	</select>
+ </div>
+ <div class="form-group">
+	<select name="subcategories">				
+	   <option>State</option>
+	</select>
+ </div>
+                  {{-- <div class="dropdown">
                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Category 
                      </button>
-                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                     <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+                        @foreach ($categories as  $key=>$value)
+
+                              <li class="divider"></li>
+                              <li class="dropdown-submenu">
+                                <a tabindex="-1" href="#" id="hash" value="{{$key}}" name="categories">{{$value->categoryname}}</a>
+                                <ul class="dropdown-menu" name="subcategories">
+                                  <li><a tabindex="-1" href="{{route('posts.index')}}"  class="dropdown-item text-center">Second level</a></li> --}}
+                                  {{-- <li class="dropdown-submenu">
+                                    <a href="#">More..</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">3rd level</a></li>
+                                        <li><a href="#">3rd level</a></li>
+                                    </ul>
+                                  </li> --}}
+                                {{-- </ul>
+                              </li>
+                        @endforeach
+                        
                      </div>
-                  </div>
+                  </div> --}}
+                  <script>
+		jQuery(document).ready(function(){
+
+jQuery('select[name="categories"]').on('change',function(){
+
+   var categoryID = jQuery(this).val();
+   if(categoryID)
+   {
+      jQuery.ajax({
+
+         url:'dropdownlist/getSubcatagories/'+categoryID,
+         type: "GET",
+         dataType: "json",
+         success: function(data)
+         {	
+            console.log(data);
+            jQuery('select[name="subcategories"]').empty();
+            jQuery.each(data,function(key,value){
+               $('select[name="subcategories"]').append('<option value="'+key+'">'+value+'</option>');
+            });
+         }
+      });
+   }
+
+   else
+   {
+      $('select[name="subcategories"]').empty();
+   }
+});
+
+});
+                  </script>
                   <div class="main">
                      <!-- Another variation with a button -->
                      <div class="input-group">

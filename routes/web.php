@@ -1,13 +1,17 @@
 <?php
 
-use App\Http\Controllers\frontend\ElectronicController;
-use App\Http\Controllers\frontend\FashionController;
-use App\Http\Controllers\frontend\JewelleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\Main;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Posts2Controller;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\frontend\FashionController;
+use App\Http\Controllers\frontend\JewelleryController;
+use App\Http\Controllers\frontend\ElectronicController;
+use App\Http\Controllers\SidebarController;
+use App\Http\Controllers\SubcatagoriesController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +29,9 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+
+    $data['categories'] = Category::orderBy('id','desc')->paginate(5);
+    return view('dashboard',$data);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -59,11 +65,18 @@ Route::get('/sammob', function() {
 
 Route::resource('posts',PostController::class);
 Route::resource('posts2',Posts2Controller::class);
+Route::resource('category',CategoryController::class);
+Route::resource('sidebar',SidebarController::class);
 
+Route::get('index',[SubcatagoriesController::class,'getCategories']);
+Route::get('index/getSubcatagories/{id}',[SubcatagoriesController::class,'getSubcatagories']);
 Route::get('/index',[Main::class,'Index']);
 Route::get('/electronic',[ElectronicController::class,'Index']);
 Route::get('/fashion',[FashionController::class,'Index']);
 Route::get('/jewellery',[JewelleryController::class,'Index']);
+//Route::get('/get_category',[CategoryController::class,'get_category']);
 
+
+Route::get('/test',[CategoryController::class,'test']);
 
 require __DIR__.'/auth.php';

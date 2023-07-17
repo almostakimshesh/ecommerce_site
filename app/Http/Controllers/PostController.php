@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Services\ImageUpload;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Services\ImageUpload;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -12,6 +13,7 @@ class PostController extends Controller
    
     public function index()
     {
+        $data['categories'] = Category::orderBy('id','desc')->paginate(5);
         $data['posts'] = Post::orderBy('id','desc')->paginate(5);
             return view('posts.index',$data);
     }
@@ -19,7 +21,8 @@ class PostController extends Controller
   
     public function create()
     {
-        return view('posts.create');
+       // $categories = Category::latest()->get();
+        return view('posts.create',compact('categories'));
     }
 
    
@@ -58,7 +61,8 @@ class PostController extends Controller
   
     public function edit(Post $post)
     {
-        return view('posts.edit',compact('post'));
+       // $categories = Category::latest()->get();
+        return view('posts.edit',compact('post'));//,
     }
 
  

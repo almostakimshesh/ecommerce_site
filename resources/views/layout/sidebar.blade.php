@@ -1,3 +1,7 @@
+
+@php
+    $categories = category();
+@endphp
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
@@ -41,34 +45,37 @@
                                 <i class="fas fa-desktop"></i>Brands</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <div class="btn-group">
-                                        <button type="button" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Walton
+                                    <a href="{{route('category.index')}}">Add Category</a>
+                                </li>
+                             @foreach ($categories as $category)
+                                    <li><br>
+                                        <button class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
+                                            {{ $category->categoryname }}
+                                          
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a class="dropdown-item text-center" href="category">Add Catagory</a>
-                                          <a class="dropdown-item text-center" href="{{route('posts.index')}}">Television</a>
-                                          <a class="dropdown-item text-center" href="{{route('posts2.index')}}">Mobile</a>
+                                             <a class="dropdown-item text-center" href="">Add Sub Catagory</a> 
+                                            <a class="dropdown-item text-center" href="{{route('posts.index')}}">Television</a>
+                                            <a class="dropdown-item text-center" href="{{route('posts2.index')}}">Mobile</a>
                                         </div>
-                                    </div>
-                                </li>
-                                <br>
-                                <li>
-                                    <div class="btn-group">
-                                        <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Samsung
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a class="dropdown-item text-center" href="samtv">Television</a>
-                                          <a class="dropdown-item text-center" href="sammob">Mobile</a>
-                                        </div>
-                                      </div>
-                                </li>
-                                <br>
+                                    </li>
+                                @endforeach
                             </ul>
                         </li>
                     </ul>
                 </nav>
             </div>
         </aside>
+        <li>
+            <div class="btn-group">
+                <button type="button" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Walton
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item text-center" href="category">Add Catagory</a>
+                  <a class="dropdown-item text-center" href="{{route('posts.index')}}">Television</a>
+                  <a class="dropdown-item text-center" href="{{route('posts2.index')}}">Mobile</a>
+                </div>
+            </div>
+        </li>
         <!-- END MENU SIDEBAR-->
