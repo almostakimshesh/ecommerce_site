@@ -10,7 +10,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 	
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	
 </head>
 <body>
@@ -36,7 +35,7 @@
 
 
 
-		<div class="dropdown">
+		{{-- <div class="dropdown">
 			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Category 
 			</button>
 			<div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
@@ -54,13 +53,13 @@
 							   <li><a href="#">3rd level</a></li>
 						   </ul>
 						 </li> --}}
-					   </ul>
+					   {{-- </ul>
 					 </li>
 			   @endforeach
 			   
 			</div>
 		 </div>
-	</div> 
+	</div>  --}}
 	<script>
 		jQuery(document).ready(function(){
 
@@ -71,7 +70,7 @@
 				{
 					jQuery.ajax({
 
-						url:'index/getSubcatagories/'+categoryID,
+						url:'dropdownlist/getSubcatagories/'+categoryID,
 						type: "GET",
 						dataType: "json",
 						success: function(data)
@@ -98,7 +97,7 @@
 </html>
 
 
-<div>
+{{-- <div>
 	<select name="categories" id="">catagory
 	   <option value="">catagory</option>
 	   @foreach($categories as $key=>$value)
@@ -111,4 +110,4 @@
 	<select name="subcategories" class="form-control" style="width:250px;">				
 	   <option>__State__</option>
 	</select>
- </div>
+ </div> --}}

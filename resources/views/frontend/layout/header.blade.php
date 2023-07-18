@@ -37,8 +37,43 @@
       <!-- owl stylesheets -->
       <link href="https://fonts.googleapis.com/css?family=Great+Vibes|Poppins:400,700&display=swap&subset=latin-ext"rel="stylesheet">
       <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.min.css')}}">
-      <link rel="stylesoeet" href="{{asset('frontend/css/owl.theme.default.min.css')}}">
+      <link rel="stylesheet" href="{{asset('frontend/css/owl.theme.default.min.css')}}">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<style>
+
+</style>
+<script>
+   jQuery(document).ready(function() {
+      jQuery('ul[name="cat"] li').on('mouseenter', function() {
+         var categoryID = jQuery(this).find('a').attr('value');
+         if (categoryID) {
+            jQuery.ajax({
+               url: 'index/getSubcatagories/' + categoryID,
+               type: "GET",
+               dataType: "json",
+               success: function(data) {
+                  var subcategoriesDropdown = jQuery('ul[name="subcategories"]');
+                  subcategoriesDropdown.empty(); // Clear existing options
+                  jQuery.each(data, function(key, value) {
+                     subcategoriesDropdown.append('<li value=' + key + ' ><a class="dropdown-item text-center" href="#">' + value + '</a></li>');
+                  });
+               }
+            });
+         } else {
+            jQuery('ul[name="subcategories"]').empty();
+         }
+      });
+      
+      jQuery('ul[name="cat"] li').on('mouseleave', function() {
+         jQuery('ul[name="subcategories"]').empty();
+      });
+   });
+</script>
+
+
+
+  
    </head>
    <body>
       <!-- banner bg main start -->
@@ -85,21 +120,27 @@
                      <a href="/jewellery">Jewellery</a>
                   </div>
                   <span class="toggle_icon" onclick="openNav()"><img src="{{asset('frontend/images/toggle-icon.png')}}"></span>
-                  
-<div>
-	<select name="categories" id="">catagory
-	   <option value="">catagory</option>
-	   @foreach($categories as $key=>$value)
-	   <option value="{{$key}}">{{$value->categoryname}}</option>
-	   @endforeach
-	</select>
- </div>
- <div class="form-group">
-	<select name="subcategories">				
-	   <option>State</option>
-	</select>
- </div>
-                  {{-- <div class="dropdown">
+                  <div class="dropdown">
+   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      All Category 
+   </button>
+   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"  name="cat">
+      @foreach ($categories as  $value)
+
+      <li>
+        <a class="dropdown-item" href="{{$value->categoryname}}" value="{{$value->id}}">{{$value->categoryname}} &raquo;
+        </a>
+        <ul class="dropdown-menu dropdown-submenu" name="subcategories" class="text-center">
+          <li >
+            <a class="dropdown-item" href="#" value=""></a>
+          </li>
+        </ul>
+      </li>
+      @endforeach
+   </ul>
+</div>
+
+                  {{--{{-- <div class="dropdown">
                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Category 
                      </button>
                      <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
@@ -123,38 +164,7 @@
                         
                      </div>
                   </div> --}}
-                  <script>
-		jQuery(document).ready(function(){
 
-jQuery('select[name="categories"]').on('change',function(){
-
-   var categoryID = jQuery(this).val();
-   if(categoryID)
-   {
-      jQuery.ajax({
-
-         url:'dropdownlist/getSubcatagories/'+categoryID,
-         type: "GET",
-         dataType: "json",
-         success: function(data)
-         {	
-            console.log(data);
-            jQuery('select[name="subcategories"]').empty();
-            jQuery.each(data,function(key,value){
-               $('select[name="subcategories"]').append('<option value="'+key+'">'+value+'</option>');
-            });
-         }
-      });
-   }
-
-   else
-   {
-      $('select[name="subcategories"]').empty();
-   }
-});
-
-});
-                  </script>
                   <div class="main">
                      <!-- Another variation with a button -->
                      <div class="input-group">

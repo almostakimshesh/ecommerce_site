@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SidebarController extends Controller
 {
@@ -20,11 +21,17 @@ class SidebarController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function getCategories()
     {
-        //
+        $categories = DB::table('categories')->pluck("categoryname","id");
+        return view('layout.sidebar',compact('categories'));
     }
 
+     public function getSubcatagories($id)
+    {
+        $subcatagories = DB::table('subcatagories')->where("categoriesid",$id)->pluck("subcatagoryname","id");
+       return json_encode($subcatagories);
+    }
     /**
      * Store a newly created resource in storage.
      */

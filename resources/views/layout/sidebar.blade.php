@@ -2,6 +2,49 @@
 @php
     $categories = category();
 @endphp
+<script>
+    jQuery(document).ready(function(){
+
+jQuery('ul[name="categories"]').on('change',function(){
+
+ var categoryID = jQuery(this).val();
+ if(categoryID)
+ {
+    jQuery.ajax({
+
+       url:'dashboard/getSubcatagories/'+categoryID,
+       type: "GET",
+       dataType: "json",
+       success: function(data)
+       {	
+          console.log(data);
+          jQuery('div[name="subcategories"]').empty();
+          jQuery.each(data,function(key,value){
+             $('div[name="subcategories"]').append('<option value='+key+' >'+value+'</option>');
+          });
+       }
+    });
+ }
+
+ else
+ {
+    $('div[name="subcategories"]').empty();
+ }
+});
+
+});
+</script>
+
+                <style>
+                    .dropdown:hover>.dropdown-menu {
+  display: block;
+}
+
+.dropdown>.dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+    pointer-events: none;
+}
+                </style>
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
@@ -43,22 +86,26 @@
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-desktop"></i>Brands</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <ul class="list-unstyled navbar__sub-list js-sub-list" name="cat">
                                 <li>
                                     <a href="{{route('category.index')}}">Add Category</a>
                                 </li>
                              @foreach ($categories as $category)
-                                    <li><br>
-                                        <button class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
-                                            {{ $category->categoryname }}
+<div class="dropdown">
+<button name="cat" type="button"
                                           
+                                          id="dropdownMenuButton"
+                                          data-mdb-toggle="dropdown"
+                                          aria-expanded="false"
+                                          value="{{$category->id}}"
+                                        >
+                                        <a href="{{$category->categoryname }}">{{$category->categoryname }} &raquo;</a>
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                             <a class="dropdown-item text-center" href="">Add Sub Catagory</a> 
-                                            <a class="dropdown-item text-center" href="{{route('posts.index')}}">Television</a>
-                                            <a class="dropdown-item text-center" href="{{route('posts2.index')}}">Mobile</a>
-                                        </div>
-                                    </li>
+                                        <ul name="subcategories" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <li><a class="dropdown-item text-center" href=""></a></li>
+                                          
+                                        </ul>
+                                      </div>
                                 @endforeach
                             </ul>
                         </li>
@@ -79,3 +126,32 @@
             </div>
         </li>
         <!-- END MENU SIDEBAR-->
+
+        <script>
+            jQuery(document).ready(function() {
+               jQuery('ul[name="cat"] li').on('mouseenter', function() {
+                  var categoryID = jQuery(this).find('button').attr('value');
+                  if (categoryID) {
+                     jQuery.ajax({
+                        url: 'dashboard/getSubcategories/'+ categoryID,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                           var subcategoriesDropdown = jQuery(this).find('ul[name="subcategories"]');
+                           subcategoriesDropdown.empty(); // Clear existing options
+                           jQuery.each(data, function(key, value) {
+                              subcategoriesDropdown.append('<li><a class="dropdown-item text-center" href="#">' + value + '</a></li>');
+                           });
+                        }.bind(this)
+                     });
+                  } else {
+                     jQuery(this).find('ul[name="subcategories"]').empty();
+                  }
+               });
+               
+               jQuery('ul[name="cat"] li').on('mouseleave', function() {
+                  jQuery(this).find('ul[name="subcategories"]').empty();
+               });
+            });
+         </script>
+         

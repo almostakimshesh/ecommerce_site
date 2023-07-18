@@ -29,9 +29,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-
-    $data['categories'] = Category::orderBy('id','desc')->paginate(5);
-    return view('dashboard',$data);
+return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -70,6 +68,9 @@ Route::resource('sidebar',SidebarController::class);
 
 Route::get('index',[SubcatagoriesController::class,'getCategories']);
 Route::get('index/getSubcatagories/{id}',[SubcatagoriesController::class,'getSubcatagories']);
+//  Route::get('/dashboard',[SidebarController::class,'getCategories']);
+//  Route::get('/dashboard/getSubcatagories/{id}',[SidebarController::class,'getSubcatagories']);
+
 Route::get('/index',[Main::class,'Index']);
 Route::get('/electronic',[ElectronicController::class,'Index']);
 Route::get('/fashion',[FashionController::class,'Index']);
