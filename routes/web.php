@@ -1,17 +1,19 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\Main;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Posts2Controller;
+use App\Http\Controllers\FashionController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\frontend\FashionController;
-use App\Http\Controllers\frontend\JewelleryController;
-use App\Http\Controllers\frontend\ElectronicController;
 use App\Http\Controllers\SidebarController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubcatagoriesController;
-use App\Models\Category;
+use App\Http\Controllers\frontend\JewelleryController;
+
+
+use App\Http\Controllers\frontend\ElectronicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,9 +62,9 @@ Route::get('/sammob', function() {
 //     return view('waltele');
 // });
 
-
 Route::resource('posts',PostController::class);
 Route::resource('posts2',Posts2Controller::class);
+ Route::resource('dashboard/fashion',FashionController::class);
 Route::resource('category',CategoryController::class);
 Route::resource('sidebar',SidebarController::class);
 
@@ -72,8 +74,10 @@ Route::get('index/getSubcatagories/{id}',[SubcatagoriesController::class,'getSub
 //  Route::get('/dashboard/getSubcatagories/{id}',[SidebarController::class,'getSubcatagories']);
 
 Route::get('/index',[Main::class,'Index']);
+
+
 Route::get('/electronic',[ElectronicController::class,'Index']);
-Route::get('/fashion',[FashionController::class,'Index']);
+Route::get('/fashion',[FashionController::class,'ndex']);
 Route::get('/jewellery',[JewelleryController::class,'Index']);
 //Route::get('/get_category',[CategoryController::class,'get_category']);
 

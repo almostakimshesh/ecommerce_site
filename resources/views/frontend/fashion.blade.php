@@ -9,13 +9,15 @@
                <h1 class="fashion_taital">Man & Woman Fashion</h1>
                <div class="fashion_section_2">
                   <div class="row">
-                     @foreach($posts2s as $post)
+                     @foreach($fashions as $fashion)
                      <div class="col-lg-4 col-sm-4">
                         <div class="box_main">
-                           <img src="{{ asset('/storage/blog/'.$post->image)}}" class="card-img-top" height="75" width="75" alt="">
+                           <a href="">
+                              <img src="{{ asset('/storage/blog/'.$fashion->image)}}" class="card-img-top" height="75" width="75" alt="">
+                           </a>
                            <div class="card-body">
-                              <h5 class="card-title">{{$post->title}}</h5>
-                              <p class="card-text">{{$post->description}}</p>
+                              <h5 class="card-title">{{$fashion->title}}</h5>
+                              <p class="card-text">{{$fashion->price}}</p>
                            </div>
                            <div class="card-footer">
                               <button type="submit" class="btn btn-danger">Add to Cart</button>

@@ -59,7 +59,7 @@ class Posts2Controller extends Controller
     public function edit(Posts2 $posts2)
     {
         //$categories = Category::latest()->get();
-        return view('posts2.edit',compact('posts2','categories'));
+        return view('posts2.edit',compact('posts2'));
     }
 
     public function update(Request $request, $id)

@@ -2,41 +2,9 @@
 @php
     $categories = category();
 @endphp
-<script>
-    jQuery(document).ready(function(){
 
-jQuery('ul[name="categories"]').on('change',function(){
-
- var categoryID = jQuery(this).val();
- if(categoryID)
- {
-    jQuery.ajax({
-
-       url:'dashboard/getSubcatagories/'+categoryID,
-       type: "GET",
-       dataType: "json",
-       success: function(data)
-       {	
-          console.log(data);
-          jQuery('div[name="subcategories"]').empty();
-          jQuery.each(data,function(key,value){
-             $('div[name="subcategories"]').append('<option value='+key+' >'+value+'</option>');
-          });
-       }
-    });
- }
-
- else
- {
-    $('div[name="subcategories"]').empty();
- }
-});
-
-});
-</script>
-
-                <style>
-                    .dropdown:hover>.dropdown-menu {
+<style>
+.dropdown:hover>.dropdown-menu {
   display: block;
 }
 
@@ -44,7 +12,8 @@ jQuery('ul[name="categories"]').on('change',function(){
   /*Without this, clicking will make it sticky*/
     pointer-events: none;
 }
-                </style>
+</style>
+   
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
@@ -92,16 +61,10 @@ jQuery('ul[name="categories"]').on('change',function(){
                                 </li>
                              @foreach ($categories as $category)
 <div class="dropdown">
-<button name="cat" type="button"
-                                          
-                                          id="dropdownMenuButton"
-                                          data-mdb-toggle="dropdown"
-                                          aria-expanded="false"
-                                          value="{{$category->id}}"
-                                        >
-                                        <a href="{{$category->categoryname }}">{{$category->categoryname }} &raquo;</a>
+<button name="cat" type="button" id="dropdownMenuButton" data-mdb-toggle="dropdown" aria-expanded="false"  value="{{$category->id}}">
+                                        <a href="/dashboard/{{$category->categoryname }}">{{$category->categoryname }} &raquo;</a>
                                         </button>
-                                        <ul name="subcategories" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <ul name="subcategories" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                           <li><a class="dropdown-item text-center" href=""></a></li>
                                           
                                         </ul>
