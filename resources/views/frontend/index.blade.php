@@ -12,16 +12,16 @@
                      @foreach($fashions as $fashion)
                      <div class="col-lg-4 col-sm-4">
                         <div class="box_main">
-                           <a href="">
+                           <a href="{{route('fashion',$fashion->id)}}"> {{-- {{route('fashion.details',$fashion->id)}} --}}
                               <img src="{{ asset('/storage/blog/'.$fashion->image)}}" class="card-img-top" height="75" width="75" alt="">
                            </a>
                            <div class="card-body">
-                              <h5 class="card-title">{{$fashion->title}}</h5>
-                              <p class="card-text">{{$fashion->price}}</p>
+                              <h5 class="card-title"><b>{{$fashion->title}}</b></h5>
+                              <p class="card-text">Price: {{$fashion->price}} taka</p>
                            </div>
                            <div class="card-footer">
                               <button type="submit" class="btn btn-primary">Buy Now</button>
-                              <button type="submit" class="btn btn-danger">Add to Cart</button>
+                                <a href="{{route('cart',$fashion->id)}}" class="btn btn-danger">Add to Cart</a>
                            </form>
                            </div>
                         </div>
@@ -51,31 +51,22 @@
                      <h1 class="fashion_taital">Electronic</h1>
                      <div class="fashion_section_2">
                         <div class="row">
-                           @foreach($posts as $post)
+                           @foreach($electronics as $electronic)
                            <div class="col-lg-4 col-sm-4">
                               <div class="box_main">
-                                 <img src="{{ asset('/storage/blog/'.$post->image)}}" class="card-img-top" height="75" width="75" alt="">
+                                  <a href="{{route('electronic',$electronic->id)}}">  {{--{{route('electronic',$electronic->id)}} --}}
+                                    <img src="{{ asset('/storage/blog/'.$electronic->image)}}" class="card-img-top" height="75" width="75" alt="">
+                                 </a>
                                  <div class="card-body">
-                                    <h5 class="card-title">{{$post->title}}</h5>
-                                    <p class="card-text">{{$post->description}}</p>
+                                    <h5 class="card-title"><b>{{$electronic->title}}</b></h5>
+                                    <p class="card-text">Price: {{$electronic->price}} taka</p>
                                  </div>
                                  <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Buy Now</button>	
-                                    <button type="submit" class="btn btn-danger">Add to cart</button>	
+                                    <button type="submit" class="btn btn-primary">Buy Now</button>
+                                    <button type="submit" class="btn btn-danger">Add to cart</button>
                                     </form>
                                  </div>
-                                 
-                              </div>
-                           </div>
-                           <div class="col-lg-4 col-sm-4">
-                              <div class="box_main">
-                                 <h4 class="shirt_text">Computers</h4>
-                                 <p class="price_text">Start Price  <span style="color: #262626;">$ 100</span></p>
-                                 <div class="electronic_img"><img src="images/computer-img.png"></div>
-                                 <div class="btn_main">
-                                    <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                    <div class="seemore_bt"><a href="#">See More</a></div>
-                                 </div>
+
                               </div>
                            </div>
                            @endforeach
@@ -93,4 +84,4 @@
          </div>
 </div>
       <!-- electronic section end -->
-@endsection    
+@endsection

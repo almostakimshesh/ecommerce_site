@@ -6,46 +6,45 @@
 			<div class="col-lg-12 margin-tb">
 				<div class="pull-left">
 					<h2>All Products</h2>
-                    <h2>CART</h2>
 				</div>
-
+		
 			</div>
 			<div class="pull-left mb-2">
-				<a href="{{ route('fashion.create')}}" class="btn btn-success">Add New Product</a>
+				<a href="{{ route('electronic.create')}}" class="btn btn-success">Add New Product</a>
 			</div>
 		</div>
-
+		
 		<br>
 		@if($message=Session::get('success'))
 		<div class="alert alert-success">
 			<p>{{$message}}</p>
 		</div>
 		@endif
-
+		
 		<div class="card-group">
 			<div class="container py-5">
 				<div class="row mt-4">
-					@foreach($fashions as $fashion)
+					@foreach($electronics as $electronic)
 						<div class="col-md-3">
 							<div class="card">
-
-
-								<a href="{{route('fashion.show',$fashion->id)}}"><img src="{{ asset('/storage/blog/'.$fashion->image)}}" class="card-img-top" height="75" width="75" alt=""></a>
+							
+								
+								<a href="{{route('electronic.show',$electronic->id)}}"><img src="{{ asset('/storage/blog/'.$electronic->image)}}" class="card-img-top" height="75" width="75" alt=""></a>
 								<div class="card-body">
-									<h5 class="card-title">{{$fashion->title}}</h5>
-									<p class="card-text">Price: {{$fashion->price}} taka</p>
+									<h5 class="card-title">{{$electronic->title}}</h5>
+									<p class="card-text">Price: {{$electronic->price}} taka</p>
 								</div>
 								<div class="card-footer">
-									<form action="{{route('fashion.destroy',$fashion->id)}}" method="post">
-									<a href="{{route('fashion.edit',$fashion->id)}}" class="btn btn-primary">Edit</a>
+									<form action="{{route('electronic.destroy',$electronic->id)}}" method="post">
+									<a href="{{route('electronic.edit',$electronic->id)}}" class="btn btn-primary">Edit</a>
 									@csrf
 									@method('DELETE')
-									<button type="submit" class="btn btn-danger">Delete</button>
+									<button type="submit" class="btn btn-danger">Delete</button>	
 									</form>
 								</div>
 							</div>
 						</div>
-					@endforeach
+					@endforeach					
 				</div>
 			</div>
 		</div>

@@ -12,12 +12,12 @@
                      @foreach($fashions as $fashion)
                      <div class="col-lg-4 col-sm-4">
                         <div class="box_main">
-                           <a href="">
+                           <a href="{{route('fashion',$fashion->id)}}">
                               <img src="{{ asset('/storage/blog/'.$fashion->image)}}" class="card-img-top" height="75" width="75" alt="">
                            </a>
                            <div class="card-body">
-                              <h5 class="card-title">{{$fashion->title}}</h5>
-                              <p class="card-text">{{$fashion->price}}</p>
+                              <h5 class="card-title"><b>{{$fashion->title}}</b></h5>
+                              <p class="card-text">Price: {{$fashion->price}} taka</p>
                            </div>
                            <div class="card-footer">
                               <button type="submit" class="btn btn-danger">Add to Cart</button>

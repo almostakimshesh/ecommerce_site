@@ -19,6 +19,14 @@ class FashionController extends Controller
         return view('frontend.fashion',$data);
     }
 
+    public function details($id)
+    {
+        $fashion = fashion::find($id);
+        return view ('frontend.fashion.details',compact('fashion'));
+
+    }
+  
+  
     public function index()
     {
         {
@@ -47,6 +55,7 @@ class FashionController extends Controller
             'title'=>'required',
             'image'=>'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'price'=>'required',
+            'description'=>'required',
 
     ]);
 
@@ -59,6 +68,7 @@ class FashionController extends Controller
     $fashion = new fashion;
     $fashion->title = $request->title;
     $fashion->price = $request->price;
+    $fashion->description = $request->description;
     $fashion->image = $upload;
     
     $fashion->save();
@@ -75,11 +85,6 @@ class FashionController extends Controller
 
     }
 
-    public function details(fashion $fashion)
-    {
-        return view('frontend.details',compact('fashion'));
-
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -100,6 +105,7 @@ class FashionController extends Controller
             'title'=>'required',
             'price'=>'required',
             'image'=>'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'description'=>'required',
     ]);
 
     $fashion = fashion::find($id);
@@ -112,6 +118,7 @@ class FashionController extends Controller
    
     $fashion->title = $request->title;
     $fashion->price = $request->price;
+    $fashion->description = $request->description;
     if(isset($upload)){
         $fashion->image = $upload;
     }

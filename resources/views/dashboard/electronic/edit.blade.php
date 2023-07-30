@@ -9,7 +9,7 @@
 					<h2>Edit Product</h2>
 				</div>
 				<div class="pull-right">
-					<a href="{{ route('fashion.index')}}" class="btn btn-primary" enctype="multipart/form-data">Back</a>
+					<a href="{{ route('electronic.index')}}" class="btn btn-primary" enctype="multipart/form-data">Back</a>
 				</div>
 			</div>
 		</div>
@@ -20,7 +20,7 @@
 		</div>
 		@endif
 	
-		<form action="{{route('fashion.update',$fashion->id)}}" method="POST" enctype="multipart/form-data">
+		<form action="{{route('electronic.update',$electronic->id)}}" method="POST" enctype="multipart/form-data">
 	
 			@csrf
 			@method('PUT')
@@ -29,20 +29,8 @@
 				<div class="col-xs-12 col-sm-12 col-md-12">
 					<div class="form-group">
 						<b>Product Title:</b>
-						<input type="text" name="title" value="{{$fashion->title}}" class="form-control" placeholder="Post Title">
+						<input type="text" name="title" value="{{$electronic->title}}" class="form-control" placeholder="Post Title">
 						@error('title')
-						<div class="alert alert-danger mt-1 mb-1">
-							{{$message}}
-						</div>
-						@enderror
-					</div>
-				</div>
-
-				<div class="col-xs-12 col-sm-12 col-md-12">
-					<div class="form-group">
-						<b>Product Description:</b>
-						<textarea name="description" value="" class="form-control" placeholder="Enter Description">{{$fashion->description}}</textarea>
-						@error('description')
 						<div class="alert alert-danger mt-1 mb-1">
 							{{$message}}
 						</div>
@@ -53,7 +41,7 @@
 				<div class="col-xs-12 col-sm-12 col-md-12">
 					<div class="form-group">
 						<b>Product Price:</b>
-						<input class="form-control" value="{{$fashion->price}}"  name="price" placeholder="Enter price">
+						<input class="form-control" value="{{$electronic->price}}"  name="price" placeholder="Enter price">
 						@error('price')
 						<div class="alert alert-danger mt-1 mb-1">
 							{{$message}}
@@ -65,7 +53,7 @@
 				<div class="col-xs-12 col-sm-12 col-md-12">
 					<div class="form-group">
 						<b>Product Image:</b>
-						<input type="file" value="{{$fashion->image}}" name="image" class="form-control" placeholder="Post Image">
+						<input type="file" name="image" class="form-control" placeholder="Post Image">
 						@error('image')
 						<div class="alert alert-danger mt-1 mb-1">
 							{{$message}}
@@ -74,7 +62,7 @@
 					</div>
 	
 					<div class="form-group">
-						<img src="{{ asset('/storage/blog/'.$fashion->image)}}" height="200" width="200" alt="{{$fashion->image}}">
+						<img src="{{ asset('/storage/blog/'.$electronic->image)}}" height="200" width="200" alt="">
 					</div>
 				</div>
 	

@@ -8,7 +8,7 @@
 				<h2>Add New Product</h2>
 			</div>
 			<div class="pull-right">
-				<a href="{{ route('fashion.index')}}" class="btn btn-primary">Back</a>
+				<a href="{{ route('electronic.index')}}" class="btn btn-primary">Back</a>
 			</div>
 		</div>
 	</div>
@@ -19,7 +19,7 @@
 	</div>
 	@endif
 
-	<form action="{{ route('fashion.store')}}" method="POST" enctype="multipart/form-data">
+	<form action="{{ route('electronic.store')}}" method="POST" enctype="multipart/form-data">
 		@csrf
 
 	<div class="row">
@@ -33,19 +33,6 @@
 				@enderror
 			</div>
 		</div>
-
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12">
-				<div class="form-group">
-					<b>Product Description:</b>
-	
-					<textarea name="description" class="form-control" placeholder="Enter Description"></textarea>
-					@error('description')
-					<div class="alert alert-danger mt-1 mb-1">{{$message}}</div>
-					@enderror
-				</div>
-			</div>
-	
 
 		<div class="col-xs-12 col-sm-12 col-md-12">
 			<div class="form-group">

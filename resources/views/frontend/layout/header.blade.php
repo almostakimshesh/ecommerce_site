@@ -64,7 +64,7 @@
             jQuery('ul[name="subcategories"]').empty();
          }
       });
-      
+
       jQuery('ul[name="cat"] li').on('mouseleave', function() {
          jQuery('ul[name="subcategories"]').empty();
       });
@@ -73,7 +73,7 @@
 
 
 
-  
+
    </head>
    <body>
       <!-- banner bg main start -->
@@ -115,14 +115,14 @@
                   <div id="mySidenav" class="sidenav">
                      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                      <a href="/index">Home</a>
-                     <a href="/fashion">Fashion</a>
-                     <a href="/electronic">Electronic</a>
-                     <a href="/jewellery">Jewellery</a>
+                     @foreach ($categories as $category)
+                        <a style="text-transform: capitalize;" href="{{$category->categoryname}}">{{$category->categoryname}}</a>
+                     @endforeach
                   </div>
                   <span class="toggle_icon" onclick="openNav()"><img src="{{asset('frontend/images/toggle-icon.png')}}"></span>
                   <div class="dropdown">
    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      All Category 
+      All Category
    </button>
    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"  name="cat">
       @foreach ($categories as  $value)
@@ -141,7 +141,7 @@
 </div>
 
                   {{--{{-- <div class="dropdown">
-                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Category 
+                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Category
                      </button>
                      <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
                         @foreach ($categories as  $key=>$value)
@@ -161,7 +161,7 @@
                                 {{-- </ul>
                               </li>
                         @endforeach
-                        
+
                      </div>
                   </div> --}}
 
@@ -188,15 +188,50 @@
                            </a>
                         </div>
                      </div>
+
+                     {{-- <div class="col-sm-2">
+
+                        @if(session('cart'))
+                            <a href="{{ url('cart') }}" class="btn btn-primary  mt-3 mb-3 btn-block">
+
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                 Cart
+                                <!-- this code count product of choose tha user choose -->
+
+                                <span class="badge badge-pill badge-danger">{{ count(session('cart')) }}</span>
+                            </a>
+                    </div>
+
+                    <div class="col-sm-4 text-center">
+
+                            @if(session('success'))
+                                <p class="btn-success  mt-3 mb-3 btn-block session" style='padding: .375rem .75rem;'>
+                                  {{ session('success') }}
+                                </p>
+                    </div>
+
+                            @endif
+                   <!-- if user dont choose any product -->
+                            @else
+
+                                <a href="" class="btn text-light bg-warning mt-3 mb-3" role="button">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                Cart Empty
+                                </a>
+
+                                @endif --}}
+
+
                      <div class="login_menu">
                         <ul>
                            <li><a href="#">
                               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                              <span class="padding_10">Cart</span></a>
+                              <span class="padding_10">Cart
+                              </span></a>
                            </li>
                            <li><a href="#">
                               <i class="fa fa-user" aria-hidden="true"></i>
-                              <span class="padding_10">Cart</span></a>
+                              <span class="padding_10"></span></a>
                            </li>
                         </ul>
                      </div>

@@ -2,18 +2,18 @@
 @section('content')
 <div class="main-content">
     <div class="section__content section__content--p30">
-
-    <h1>{{$fashion->title}}</h1><br>
+    </div>
+    <h1>{{$electronic->title}}</h1>
 
     <div class="row">
       <div class="col-md-6">
-        <img src="{{ asset('/storage/blog/'.$fashion->image)}}" alt="Product Image" class="img-fluid">
+        <img src="{{ asset('/storage/blog/'.$electronic->image)}}" alt="Product Image" class="img-fluid">
       </div>
       <div class="col-md-6">
         <h4>Product Description</h4>
-        <p>{{$fashion->description}} <br></p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel mollis neque, nec vulputate elit. Suspendisse potenti. <br></p>
         
-        <h4>Price: {{$fashion->price}}</h4>
+        <h4>Price: {{$electronic->price}} taka</h4>
         
         <p>Availability: In Stock</p>
         
@@ -40,11 +40,11 @@
         </ul>
       </div>
     </div>
-
+  </div>
 
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
 </html>
-</div>
+
 </div>
 @endsection

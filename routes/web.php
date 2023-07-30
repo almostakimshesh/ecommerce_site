@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Cart;
+use App\Http\Controllers\CartController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\Main;
@@ -9,11 +11,10 @@ use App\Http\Controllers\FashionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SidebarController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ElectronicController;
 use App\Http\Controllers\SubcatagoriesController;
 use App\Http\Controllers\frontend\JewelleryController;
-
-
-use App\Http\Controllers\frontend\ElectronicController;
+use App\Http\Controllers\ElectronicController as ControllersElectronicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,31 +41,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/calendar', function() {
-    return view('calendar');
-});
-Route::get('/map', function() {
-    return view('map');
-});
-
-
-Route::get('/walmob', function() {
-    return view('walmob');
-});
-Route::get('/samtv', function() {
-    return view('samtv');
-});
 Route::get('/sammob', function() {
     return view('sammob');
 });
 
-// Route::get('waltele', function() {
-//     return view('waltele');
-// });
-
 Route::resource('posts',PostController::class);
 Route::resource('posts2',Posts2Controller::class);
  Route::resource('dashboard/fashion',FashionController::class);
+ Route::resource('dashboard/electronic',ControllersElectronicController::class);
 Route::resource('category',CategoryController::class);
 Route::resource('sidebar',SidebarController::class);
 
@@ -75,13 +59,26 @@ Route::get('index/getSubcatagories/{id}',[SubcatagoriesController::class,'getSub
 
 Route::get('/index',[Main::class,'Index']);
 
+// Route::get('fashion/details/{id}',[FashionController::class,'details']);
 
-Route::get('/electronic',[ElectronicController::class,'Index']);
+// Route::get('/electronic',[ElectronicController::class,'Index']);
 Route::get('/fashion',[FashionController::class,'ndex']);
+Route::get('/fashion/{id}',[FashionController::class,'details'])->name('fashion');
+Route::get('/electronic',[ElectronicController::class,'ndex']);
+Route::get('/electronic/{id}',[ElectronicController::class,'details'])->name('electronic');
 Route::get('/jewellery',[JewelleryController::class,'Index']);
-//Route::get('/get_category',[CategoryController::class,'get_category']);
+// Route::get('/get_category',[CategoryController::class,'get_category']);
 
-
+Route::get('cart',[Cart::class,'addtoCart'])->name('cart');
 Route::get('/test',[CategoryController::class,'test']);
+// Route::post('/store',[CartController::class,'store'])->name('cart.store');
+Route::post('/add-to-cart/{id}', [Cart::class, 'addtoCart'])->name('cart.add');
+
+
+// Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
+// Route::get('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+// Route::delete('/cart/{product_id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
+Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
 
 require __DIR__.'/auth.php';
