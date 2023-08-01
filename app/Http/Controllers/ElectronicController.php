@@ -28,14 +28,14 @@ class ElectronicController extends Controller
             $data['electronics'] = Electronic::orderBy('id','desc')->paginate(5);
                 return view('dashboard.electronic.index',$data);
         }
-    
+
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {        
+    {
         return view('dashboard.electronic.create');
     }
 
@@ -57,12 +57,12 @@ class ElectronicController extends Controller
         $upload = (new ImageUpload)->imageUpload($request->file('image'), $folder);
     }
 
-   
+
     $electronic = new Electronic;
     $electronic->title = $request->title;
     $electronic->price = $request->price;
     $electronic->image = $upload;
-    
+
     $electronic->save();
     return redirect()->route('electronic.index')->with('success','product has been created successfully');
     }
@@ -95,7 +95,7 @@ class ElectronicController extends Controller
         $upload = (new ImageUpload)->imageUpload($request->file('image'), $folder);
     }
 
-   
+
     $electronic->title = $request->title;
     $electronic->price = $request->price;
     if(isset($upload)){

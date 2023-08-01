@@ -40,8 +40,14 @@
       <link rel="stylesheet" href="{{asset('frontend/css/owl.theme.default.min.css')}}">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<style>
 
+<style>
+    td{
+        text-align: center
+    }
+ th{
+    text-align: center
+ }
 </style>
 <script>
    jQuery(document).ready(function() {
@@ -85,11 +91,12 @@
                   <div class="col-sm-12">
                      <div class="custom_menu">
                         <ul>
-                           <li><a href="#">Best Sellers</a></li>
-                           <li><a href="#">Gift Ideas</a></li>
                            <li><a href="#">New Releases</a></li>
                            <li><a href="#">Today's Deals</a></li>
                            <li><a href="#">Customer Service</a></li>
+                           <li><a href="#">Log in </a></li>
+                           <li><a href="#">Register</a></li>
+                           <li><a href="#">Logout</a></li>
                         </ul>
                      </div>
                   </div>
@@ -224,11 +231,64 @@
 
                      <div class="login_menu">
                         <ul>
-                           <li><a href="#">
+                           <li data-toggle="modal" data-target="#exampleModalCenter"><a href="#">
                               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                              <span class="padding_10">Cart
+                              <span class="padding_10">Cart &nbsp;{{is_countable(session()->get('cart'))}}
                               </span></a>
                            </li>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Cart Contents:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">IMAGE</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">QUANTITY</th>
+                    <th scope="col">PRICE</th>
+                    <th scope="col">TOTAL PRICE</th>
+                    <th scope="col">ACTION</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @if (!empty(session()->get('cart')))
+                    @foreach(session()->get('cart') as $productId  => $item)
+                  <tr>
+                    <th scope="row"><img src="{{ asset('/storage/blog/'.$item['image'])}}" alt="" width="100" height="100"></th>
+                    <td>{{ $item['name'] }}</td>
+                    <td>{{ $item['quantity'] }}</td>
+                    <td>{{ $item['price'] }}</td>
+                    <td>{{ $item['total']}}</td>
+                    <td>
+                        <form action="{{ route('cart.remove', $productId) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                  </tr>
+                  @endforeach
+                </ul>
+            @else
+                <p>Your cart is empty.</p>
+            @endif
+                </tbody>
+              </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
                            <li><a href="#">
                               <i class="fa fa-user" aria-hidden="true"></i>
                               <span class="padding_10"></span></a>

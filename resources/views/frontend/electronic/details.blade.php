@@ -15,11 +15,15 @@
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel mollis neque, nec vulputate elit. Suspendisse potenti. <br></p>
                   <h4><b>Price: {{$electronic->price}} taka</b></h4>
                   <p>Availability: In Stock</p>
-                  <div class="form-group">
-                    <label for="quantity">Quantity:1</label>
-                    <input type="number" id="quantity" class="form-control" value="1" min="1">
-                  </div>
-                  <button class="btn btn-primary">Buy</button>
+                  <form action="{{ route('add.cart',['id' => $electronic->id])}}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="quantity">Quantity:</label>
+                        <input name="quantity" type="number" id="quantity" class="form-control" value="1" min="1">
+
+                      </div>
+                      <button class="btn btn-primary">add to cart</button>
+                </form>
                 </div>
               </div>
               <div class="row mt-4">

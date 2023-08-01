@@ -7,6 +7,31 @@
          <div class="carousel-item active">
             <div class="container">
                <h1 class="fashion_taital">Man & Woman Fashion</h1>
+               {{-- <div>
+                <!-- Display the products in the cart -->
+
+                @if (!empty(session()->get('cart')))
+                    <h2>Cart Contents:</h2>
+                    <ul>
+                        @foreach(session()->get('cart') as $productId  => $item)
+                            <li>
+                                {{ $item['name'] }} - Quantity: {{ $item['quantity'] }} - Price: {{ $item['price'] }} - total: {{ $item['total']}}
+                                - Image: <img src="{{ asset('/storage/blog/'.$item['image'])}}" alt="" width="100" height="100">
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p>Your cart is empty.</p>
+                @endif
+            </div> --}}
+               @if(session('success'))
+               <div class="alert alert-success">{{ session('success') }}</div>
+           @endif
+
+           @if(session('error'))
+               <div class="alert alert-danger">{{ session('error') }}</div>
+
+           @endif
                <div class="fashion_section_2">
                   <div class="row">
                      @foreach($fashions as $fashion)
@@ -21,7 +46,7 @@
                            </div>
                            <div class="card-footer">
                               <button type="submit" class="btn btn-primary">Buy Now</button>
-                                <a href="{{route('cart',$fashion->id)}}" class="btn btn-danger">Add to Cart</a>
+                                <a href="{{route('fashion',$fashion->id)}}" class="btn btn-danger">Add to Cart</a>
                            </form>
                            </div>
                         </div>
@@ -63,7 +88,7 @@
                                  </div>
                                  <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Buy Now</button>
-                                    <button type="submit" class="btn btn-danger">Add to cart</button>
+                                    <a href="" type="submit" class="btn btn-danger">Add to cart</a>
                                     </form>
                                  </div>
 

@@ -2,30 +2,67 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Fashion; // Make sure the model class name is properly capitalized
+use App\Models\Electronic;
 use Illuminate\Http\Request;
 
 class Cart extends Controller
 {
-    public function addtoCart($id)
+    public function addToCart(Request $request, $id)
     {
-        $fashion = Fashion::find($id); // Assuming the model name is "Fashion" and not "fashion"
+        // Retrieve the product with the given ID from the database
+        $electronic = Electronic::find($id);
 
-        if (!$fashion) {
-            return redirect()->back()->with('error', 'Cloth not found.'); // Handle the case where the fashion item is not found.
+        if (!$electronic) {
+            return redirect()->back()->with('error', 'Product not found.');
         }
 
-        $cart = session()->get('cart', []); // Initialize the cart as an empty array if it doesn't exist in the session.
+        // Get the quantity from the form submission
+        $quantity = $request->quantity;
+        $totalPrice = $quantity * $electronic->price;
+        // Add the product to the cart
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
+            // If the product is already in the cart, update the quantity
+            $cart[$id]['quantity'] += $quantity;
+            $cart[$id]['total'] = $cart[$id]['quantity'] * $cart[$id]['price'];
 
-        $cart[$id] = [
-            "name" => $fashion->name,
-            "qty" => 1,
-            "price" => $fashion->price,
-        ];
+        } else {
+            // If the product is not in the cart, add it as a new item
+            $cart[$id] = [
+                'name' => $electronic->title,
+                'quantity' => $quantity,
+                'price' => $electronic->price,
+                'image' => $electronic->image,
+                'total' => $totalPrice,
+            ];
+        }
 
+        // // Calculate the total for the new or updated item
+
+        // Store the updated cart in the session
         session()->put('cart', $cart);
+        // dd($cart);
+        return redirect('index')->with('success', 'Product added to cart successfully.');
+    }
 
-        return redirect()->back()->with('success', 'Cloth added successfully.');
-        // return view('cart', compact('cart')); // You don't need to return the view if you are redirecting back to the previous page.
+    public function removeFromCart($productId)
+    {
+        // Get the cart data from the session
+        $cart = session()->get('cart', []);
+
+        // Check if the product with the given ID exists in the cart
+        if (isset($cart[$productId])) {
+            // If the product exists, remove it from the cart
+            unset($cart[$productId]);
+
+            // Update the cart in the session with the modified data
+            session()->put('cart', $cart);
+
+            // Redirect back to the cart page with a success message
+            return redirect()->back()->with('success', 'Product removed from cart successfully.');
+        } else {
+            // If the product is not found in the cart, redirect back with an error message
+            return redirect()->back()->with('error', 'Product not found in cart.');
+        }
     }
 }

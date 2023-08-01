@@ -20,7 +20,7 @@
                               <p class="card-text">Price: {{$fashion->price}} taka</p>
                            </div>
                            <div class="card-footer">
-                              <button type="submit" class="btn btn-danger">Add to Cart</button>
+                              <a href="{{route('fashion',$fashion->id)}}" type="submit" class="btn btn-danger">Add to Cart</a>
                               <button type="submit" class="btn btn-primary">Buy Now</button>
                               </form>
                            </div>

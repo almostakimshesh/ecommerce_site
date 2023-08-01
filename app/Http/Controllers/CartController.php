@@ -7,71 +7,64 @@ use App\Models\fashion;
 
 class CartController extends Controller
 {
-    // public function showCart()
-    // {
-    //     $cart = session()->get('cart', []);
 
-    //     return view('cart.show', compact('cart'));
-    // }
+public function addToCart(Request $request, $id)
+{
+    // Retrieve the product with the given ID from the database
+    $fashion = fashion::find($id);
 
-    // public function addToCart(Request $request)
-    // {
-    //     $productId = $request->input('product_id');
-    //     $product = [
-    //         'id' => $productId,
-    //         'name' => 'Product ' . $productId,
-    //         'price' => 9.99, // Replace with your product's actual price
-    //         'quantity' => 1,
-    //     ];
+    if (!$fashion) {
+        return redirect()->back()->with('error', 'Product not found.');
+    }
 
-    //     $cart = session()->get('cart', []);
-    //     $cart[$productId] = $product;
-    //     session()->put('cart', $cart);
+    // Get the quantity from the form submission
+    $quantity = $request->quantity;
+    $totalPrice = $quantity * $fashion->price;
+    // Add the product to the cart
+    $cart = session()->get('cart', []);
+    if (isset($cart[$id])) {
+        // If the product is already in the cart, update the quantity
+        $cart[$id]['quantity'] += $quantity;
+        $cart[$id]['total'] = $cart[$id]['quantity'] * $cart[$id]['price'];
 
-    //     return redirect()->route('cart.show');
-    // }
-    // public function removeFromCart($productId)
-    // {
-    //     $cart = session()->get('cart', []);
+    } else {
+        // If the product is not in the cart, add it as a new item
+        $cart[$id] = [
+            'name' => $fashion->title,
+            'quantity' => $quantity,
+            'price' => $fashion->price,
+            'image' => $fashion->image,
+            'total' => $totalPrice,
+        ];
+    }
 
-    //     if (array_key_exists($productId, $cart)) {
-    //         unset($cart[$productId]);
-    //         session()->put('cart', $cart);
-    //     }
+    // // Calculate the total for the new or updated item
 
-    //     return redirect()->route('cart.show');
-    // }
+    // Store the updated cart in the session
+    session()->put('cart', $cart);
+    // dd($cart);
+    return redirect('index')->with('success', 'Product added to cart successfully.');
+}
 
-    public function addToCart(Request $request, $id)
-    {
-        // Retrieve the product with the given ID from the database
-        $fashion = fashion::find($id);
+public function removeFromCart($productId)
+{
+    // Get the cart data from the session
+    $cart = session()->get('cart', []);
 
-        if (!$fashion) {
-            return redirect()->back()->with('error', 'Product not found.');
-        }
+    // Check if the product with the given ID exists in the cart
+    if (isset($cart[$productId])) {
+        // If the product exists, remove it from the cart
+        unset($cart[$productId]);
 
-        // Get the quantity from the form submission
-        $quantity = $request->input('qty', 1);
-
-        // Add the product to the cart
-        $cart = session()->get('cart', []);
-        if (isset($cart[$id])) {
-            // If the product is already in the cart, update the quantity
-            $cart[$id]['quantity'] += $quantity;
-        } else {
-            // If the product is not in the cart, add it as a new item
-            $cart[$id] = [
-                'name' => $fashion->title,
-                'quantity' => $quantity,
-                'price' => $fashion->price,
-                'image' => $fashion->image,
-            ];
-        }
-
-        // Store the updated cart in the session
+        // Update the cart in the session with the modified data
         session()->put('cart', $cart);
 
-        return redirect()->back()->with('success', 'Product added to cart successfully.');
+        // Redirect back to the cart page with a success message
+        return redirect()->back()->with('success', 'Product removed from cart successfully.');
+    } else {
+        // If the product is not found in the cart, redirect back with an error message
+        return redirect()->back()->with('error', 'Product not found in cart.');
     }
 }
+}
+

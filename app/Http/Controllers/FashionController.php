@@ -25,8 +25,8 @@ class FashionController extends Controller
         return view ('frontend.fashion.details',compact('fashion'));
 
     }
-  
-  
+
+
     public function index()
     {
         {
@@ -34,7 +34,7 @@ class FashionController extends Controller
             $data['fashions'] = fashion::orderBy('id','desc')->paginate(5);
                 return view('dashboard.fashion.index',$data);
         }
-    
+
     }
 
     /**
@@ -64,13 +64,13 @@ class FashionController extends Controller
         $upload = (new ImageUpload)->imageUpload($request->file('image'), $folder);
     }
 
-   
+
     $fashion = new fashion;
     $fashion->title = $request->title;
     $fashion->price = $request->price;
     $fashion->description = $request->description;
     $fashion->image = $upload;
-    
+
     $fashion->save();
     return redirect()->route('fashion.index')->with('success','product has been created successfully');
 
@@ -115,7 +115,7 @@ class FashionController extends Controller
         $upload = (new ImageUpload)->imageUpload($request->file('image'), $folder);
     }
 
-   
+
     $fashion->title = $request->title;
     $fashion->price = $request->price;
     $fashion->description = $request->description;

@@ -21,11 +21,11 @@
                                     <p class="card-text">Price: {{$electronic->price}} taka</p>
                                  </div>
                                  <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Buy Now</button>	
-                                    <button type="submit" class="btn btn-danger">Add to cart</button>	
+                                    <button type="submit" class="btn btn-primary">Buy Now</button>
+                                    <a href="" type="submit" class="btn btn-danger">Add to cart</a>
                                     </form>
                                  </div>
-                                 
+
                               </div>
                            </div>
                            @endforeach
