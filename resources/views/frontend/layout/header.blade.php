@@ -2,6 +2,9 @@
 @php
    $categories = category();
 @endphp
+@php
+    $cus_users = cus_users();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -90,14 +93,24 @@
                <div class="row">
                   <div class="col-sm-12">
                      <div class="custom_menu">
+                        @if (Auth::user())
                         <ul>
-                           <li><a href="#">New Releases</a></li>
-                           <li><a href="#">Today's Deals</a></li>
-                           <li><a href="#">Customer Service</a></li>
-                           <li><a href="#">Log in </a></li>
-                           <li><a href="#">Register</a></li>
-                           <li><a href="#">Logout</a></li>
+                            <li><a href="#">New Releases</a></li>
+                            <li><a href="#">Today's Deals</a></li>
+                            <li><a href="">Customer Service</a></li>
+                            <li title="user"><a href="#"><b class="text-capitalize">{{ Auth::user()->name}}</b></a></li>
+                            <li><a href="{{url('/logout')}}">Logout</a></li>
                         </ul>
+                    @else
+                        <ul>
+                            <li><a href="#">New Releases</a></li>
+                            <li><a href="#">Today's Deals</a></li>
+                            <li><a href="">Customer Service</a></li>
+                            <li><a href="{{ route('userlogin') }}">Log in</a></li>
+                            <li><a href="{{ route('index.register') }}">Register</a></li>
+                        </ul>
+                    @endif
+
                      </div>
                   </div>
                </div>
@@ -233,8 +246,13 @@
                         <ul>
                            <li data-toggle="modal" data-target="#exampleModalCenter"><a href="#">
                               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                              <span class="padding_10">Cart &nbsp;{{is_countable(session()->get('cart'))}}
-                              </span></a>
+                              @if(session()->get('cart') == 0)
+                              <span class="padding_10" title="Cart details">{{is_countable(session()->get('cart'))}}
+                              </span>
+                              @else
+                              <span class="padding_10" title="Cart details">{{count(session()->get('cart'))}}
+                              </span>
+                              @endif</a>
                            </li>
   <!-- Modal -->
   <div class="modal fade" id="exampleModalCenter" tabindex="1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -269,6 +287,7 @@
                     <td>{{ $item['total']}}</td>
                     <td>
                         <form action="{{ route('cart.remove', $productId) }}" method="POST">
+                            <a href="#" class="btn btn-info">Buy Now</a>
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
@@ -288,12 +307,35 @@
         </div>
       </div>
     </div>
-  </div>
-                           <li><a href="#">
-                              <i class="fa fa-user" aria-hidden="true"></i>
-                              <span class="padding_10"></span></a>
-                           </li>
-                        </ul>
+  </div>&nbsp;&nbsp;
+  <div class="lang_box ">
+        <div class="lang_box ">
+            <a href="#" title="Language" class="nav-link" data-toggle="dropdown" aria-expanded="true">
+                 <i class="fa fa-user" aria-hidden="true"></i>&nbsp; Profile <i class="fa fa-angle-down ml-2" aria-hidden="true"></i>
+
+            </a>
+            <div class="dropdown-menu ">
+               <a href="#" class="dropdown-item">
+                @if ($loggedInUser = Auth::user())
+                <span class="padding_10">{{ Auth::user()->name}}</span>
+                <a class="dropdown-item " href="{{url('/logout')}}" >
+                <span class="padding_10">Logout</span>
+                </a>
+                @else
+                    <a class="dropdown-item" href="{{ route('userlogin') }}">
+                        <span class="padding_10">Log in</span>
+                    </a>
+                    <a class="dropdown-item" href="{{ route('index.register') }}">
+                        <span class="padding_10">Register</span>
+                    </a>
+                @endif
+               </a>
+            </div>
+         </div>
+    </a>
+
+ </div>
+
                      </div>
                   </div>
                </div>

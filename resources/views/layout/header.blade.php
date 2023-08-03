@@ -61,7 +61,7 @@
                                         <span class="quantity">1</span>
                                         <div class="mess-dropdown js-dropdown">
                                             <div class="mess__title">
-                                                <p>You have 2 news message</p> 
+                                                <p>You have 2 news message</p>
                                             </div>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
@@ -169,7 +169,7 @@
                                 </div>
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
-                                      
+
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">  {{ Auth::user()->name ?? '' }}</a>
                                         </div>
@@ -190,20 +190,17 @@
                                             <div class="account-dropdown__body">
 
          {{------------------------------ problem -------------------}}
-                                                <form action="{{ route('profile.edit')}}" method="GET">
-                                                    @csrf
-                                                    <div class="account-dropdown__item text-center">
-                                                        <button  type="submit">
-                                                            <i class="zmdi zmdi-account"></i>&nbsp; profile</button>
-                                                    </div>
-                                                </form>
-                                                <form action="{{ route('logout')}}" method="POST">
-                                                    @csrf
-                                                    <div class="account-dropdown__footer text-center">
-                                                        <button  type="submit">
-                                                            <i class="zmdi zmdi-power"></i>&nbsp;Logout</button>
-                                                    </div>
-                                                </form>
+
+
+                                                    <div  class="dropdown-item text-center"><a href="{{ route('profile.edit')}}" class="text-dark">
+
+                                                            <i class="zmdi zmdi-account"></i> profile
+                                                    </a></div>
+                                            <div class="dropdown-item text-center">
+                                                <a href="{{ route('logout')}}" class="text-dark">
+                                                            <i class="zmdi zmdi-power"></i> Logout
+                                                </a>
+                                            </div>
          {{------------------------------ problem -------------------}}
 
                                                 {{-- <div class="account-dropdown__item">
@@ -226,4 +223,3 @@
 
 
             <!-- HEADER DESKTOP-->
-   

@@ -7,8 +7,8 @@
                 <div class="container">
                     <div class="card bg-light">
                         <article class="card-body mx-auto" style="max-width: 400px;">
-                            <h4 class="card-title mt-3 text-center">Create Account</h4>
-                            <form action="{{ route('register.store')}}" method="POST" enctype="multipart/form-data">
+                            <h2 class="card-title mt-3 text-center"><a href="#">Log In</a></h2>
+                            <form action="{{ route('userlogin')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                             <div class="form-group input-group">
                                 <div class="input-group-prepend">

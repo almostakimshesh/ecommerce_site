@@ -7,7 +7,7 @@
                 <div class="container">
                     <div class="card bg-light">
                         <article class="card-body mx-auto" style="max-width: 400px;">
-                            <h4 class="card-title mt-3 text-center">Create Account</h4>
+                            <h2 class="card-title mt-3 text-center"><a href="#">Create Account</a></h2><br>
                             <form action="{{ route('register.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                             <div class="form-group input-group">
@@ -54,17 +54,6 @@
                         <!--container end.//-->
 
                         <br><br>
-                        <article class="bg-secondary mb-3">
-                        <div class="card-body text-center">
-                            <h3 class="text-white mt-3">Bootstrap 4 UI KIT</h3>
-                        <p class="h5 text-white">Components and templates  <br> for Ecommerce, marketplace, booking websites
-                        and product landing pages</p>   <br>
-                        <p><a class="btn btn-warning" target="_blank" href="http://bootstrap-ecommerce.com/"> Bootstrap-ecommerce.com
-                         <i class="fa fa-window-restore "></i></a></p>
-                        </div>
-                        <br><br>
-                        </article>
-                </div>
             </div>
        </div>
     </div>

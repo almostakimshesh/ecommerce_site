@@ -54,13 +54,14 @@ Route::resource('posts2',Posts2Controller::class);
 Route::resource('category',CategoryController::class);
 Route::resource('sidebar',SidebarController::class);
 Route::resource('/user/register',CusUserController::class);
+Route::get('index/register',[CusUserController::class,'show'])->name('index.register');
 
 Route::get('index',[SubcatagoriesController::class,'getCategories']);
 Route::get('index/getSubcatagories/{id}',[SubcatagoriesController::class,'getSubcatagories']);
 //  Route::get('/dashboard',[SidebarController::class,'getCategories']);
 //  Route::get('/dashboard/getSubcatagories/{id}',[SidebarController::class,'getSubcatagories']);
 
-Route::get('/index',[Main::class,'Index']);
+Route::get('/index',[Main::class,'Index'])->name('index');
 
 // Route::get('fashion/details/{id}',[FashionController::class,'details']);
 
@@ -90,4 +91,5 @@ Route::delete('/cart/{productId}', [CartController::class,'removeFromCart'])->na
 Route::get('index/login', [LoginController::class, 'showLoginForm'])->name('userlogin');
 Route::post('index/login', [LoginController::class, 'userlogin']);
 // Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
+Route::get('logout',[LoginController::class,'logout']);
 require __DIR__.'/auth.php';

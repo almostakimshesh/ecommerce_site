@@ -13,6 +13,12 @@ class CusUserController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function ndex()
+    {
+        $data['cus_users'] = Cus_user::orderBy('id','desc')->paginate(5);
+        return view('frontend.layout.header',$data);
+    }
+
     public function index()
     {
         return view('frontend.user.register');
