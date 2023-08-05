@@ -1,74 +1,48 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Products;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+
 
 class ProductsController extends Controller
 {
-    public function getCategories()
+    public function dashboard()
     {
-        $categories = DB::table('categories')->pluck("categoryname","id");
-        return view('dashboard.products.index',compact('categories'));
+        return view('dashboard');
     }
 
-     public function getProducts($id)
+
+    public function login(Request $request)
     {
-        $products = DB::table('products')->where("categoriesid",$id)->pluck("productname","productprice","productimage","id");
-       return json_encode($products);
-    }
-    public function index()
-    {
-        //
+        return view('frontend.user.login');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function userlogin(Request $request)
     {
-        //
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::guard('admin')->attempt($credentials)) {
+            // Authentication passed
+            return redirect('dashboard'); // Change 'dashboard' to your actual route name
+        } else {
+            // Authentication failed, redirect back to the login form with an error message
+            return 'dfdfdfd';
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+
+
+        public function logout()
     {
-        //
+        Auth::logout();
+        return redirect()->route('login');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Products $products)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Products $products)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Products $products)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Products $products)
-    {
-        //
-    }
 }

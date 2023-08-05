@@ -191,12 +191,12 @@
 
          {{------------------------------ problem -------------------}}
 
-
+{{--
                                                     <div  class="dropdown-item text-center"><a href="{{ route('profile.edit')}}" class="text-dark">
 
                                                             <i class="zmdi zmdi-account"></i> profile
-                                                    </a></div>
-                                            <div class="dropdown-item text-center">
+                                                    </a></div>--}}
+                                             <div class="dropdown-item text-center">
                                                 <a href="{{ route('logout')}}" class="text-dark">
                                                             <i class="zmdi zmdi-power"></i> Logout
                                                 </a>

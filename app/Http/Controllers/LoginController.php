@@ -11,47 +11,59 @@ use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
-    public function ndex()
+    public function dashboard()
     {
-        $data['cus_users'] = Cus_user::orderBy('id','desc')->paginate(5);
-        return view('frontend.layout.header',$data);
+        return view('dashboard');
     }
-    public function showLoginForm()
+
+    
+    public function login()
     {
+
         return view('frontend.user.login');
     }
 
-    public function userlogin(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+    // public function ndex()
+    // {
+    //     $data['cus_users'] = Cus_user::orderBy('id','desc')->paginate(5);
+    //     return view('frontend.layout.header',$data);
+    // }
+    // public function showLoginForm()
+    // {
+    //     return view('frontend.user.login');
+    // }
 
-        if (Auth::attempt($credentials)) {
-            // Authentication passed
-            return redirect()->route('index'); // Change 'dashboard' to the desired route
-        } else {
-            // Authentication failed, redirect back to the login form with an error message
-            return redirect()->route('index/login')->with('error', 'Invalid credentials.');
-        }
-    }
+    // public function userlogin(Request $request)
+    // {
+    //     $credentials = $request->validate([
+    //         'email' => ['required', 'email'],
+    //         'password' => ['required'],
+    //     ]);
 
-    /**
-     * Handle the logout request.
-     */
-    public function logout()
-    {
-        Auth::logout();
-        return redirect()->route('userlogin');
-    }
+    //     if (Auth::attempt($credentials)) {
+    //         // Authentication passed
+    //         return redirect()->route('index'); // Change 'dashboard' to the desired route
+    //     } else {
+    //         // Authentication failed, redirect back to the login form with an error message
+    //         return redirect()->route('index/login')->with('error', 'Invalid credentials.');
+    //     }
+    // }
 
-    public function showIndex()
-    {
-        $loggedInUser = Auth::user(); // Get the currently logged-in user from the Auth facade
+    // /**
+    //  * Handle the logout request.
+    //  */
+    // public function logout()
+    // {
+    //     Auth::logout();
+    //     return redirect()->route('userlogin');
+    // }
 
-        // Pass the $loggedInUser variable to the 'frontend.layout.header' view
-        return $loggedInUser;
-    }
+    // public function showIndex()
+    // {
+    //     $loggedInUser = Auth::user(); // Get the currently logged-in user from the Auth facade
+
+    //     // Pass the $loggedInUser variable to the 'frontend.layout.header' view
+    //     return $loggedInUser;
+    // }
 
 }

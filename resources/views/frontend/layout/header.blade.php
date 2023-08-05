@@ -106,8 +106,8 @@
                             <li><a href="#">New Releases</a></li>
                             <li><a href="#">Today's Deals</a></li>
                             <li><a href="">Customer Service</a></li>
-                            <li><a href="{{ route('userlogin') }}">Log in</a></li>
-                            <li><a href="{{ route('index.register') }}">Register</a></li>
+                            {{-- <li><a href="{{ route('userlogin') }}">Log in</a></li>
+                            <li><a href="{{ route('index.register') }}">Register</a></li> --}}
                         </ul>
                     @endif
 
@@ -316,7 +316,7 @@
             </a>
             <div class="dropdown-menu ">
                <a href="#" class="dropdown-item">
-                @if ($loggedInUser = Auth::user())
+                {{-- @if ($loggedInUser = Auth::user())
                 <span class="padding_10">{{ Auth::user()->name}}</span>
                 <a class="dropdown-item " href="{{url('/logout')}}" >
                 <span class="padding_10">Logout</span>
@@ -328,7 +328,7 @@
                     <a class="dropdown-item" href="{{ route('index.register') }}">
                         <span class="padding_10">Register</span>
                     </a>
-                @endif
+                @endif --}}
                </a>
             </div>
          </div>
