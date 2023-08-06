@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Session;
 
 
 
@@ -15,34 +17,30 @@ class ProductsController extends Controller
     }
 
 
-    public function login(Request $request)
+    public function adlogin(Request $request)
     {
-        return view('frontend.user.login');
+        return view('dashboard.user.login');
     }
 
-    public function userlogin(Request $request)
+    public function adminlogin(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-
         if (Auth::guard('admin')->attempt($credentials)) {
-            // Authentication passed
             return redirect('dashboard'); // Change 'dashboard' to your actual route name
         } else {
             // Authentication failed, redirect back to the login form with an error message
-            return 'dfdfdfd';
+            return redirect('/')->with('error','Invalid credentials.');
         }
     }
-
-
-
-
-        public function logout()
+        public function logouts()
     {
-        Auth::logout();
-        return redirect()->route('login');
+        Session::flush();
+        Auth::guard('admin')->logout();
+
+        return redirect('/');
     }
 
 }

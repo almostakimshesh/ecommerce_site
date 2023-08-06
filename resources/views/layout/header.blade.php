@@ -171,7 +171,7 @@
                                     <div class="account-item clearfix js-item-menu">
 
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">  {{ Auth::user()->name ?? '' }}</a>
+                                            <a class="js-acc-btn" href="#">  {{ Auth::guard('admin')->name ?? '' }}</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -182,9 +182,9 @@
                                                 </div> --}}
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#"> {{ Auth::user()->name ?? '' }}</a>
+                                                        <a href="#"> {{ Auth::guard('admin')->name ?? '' }}</a>
                                                     </h5>
-                                                    <span class="email"> {{ Auth::user()->email ?? '' }}</span>
+                                                    <span class="email"> {{ Auth::guard('admin')->email ?? '' }}</span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -197,7 +197,7 @@
                                                             <i class="zmdi zmdi-account"></i> profile
                                                     </a></div>--}}
                                              <div class="dropdown-item text-center">
-                                                <a href="{{ route('logout')}}" class="text-dark">
+                                                <a href="{{ url('logouts')}}" class="text-dark">
                                                             <i class="zmdi zmdi-power"></i> Logout
                                                 </a>
                                             </div>

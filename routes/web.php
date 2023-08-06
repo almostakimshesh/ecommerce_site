@@ -36,26 +36,31 @@ use App\Http\Middleware\Admin;
 //     return view('welcome');
 // });
 
-// Route::get('/dashboard', function () {
-// return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/index', function () {
+return view('index');
+})->middleware(['auth', 'verified'])->name('index');
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-//     Route::resource('dashboard/fashion',FashionController::class);
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-// });
+});
 
 
 
 Route::group(['prefix' => '/'], function () {
-    Route::get('/', [ProductsController::class, 'login']);
-    Route::post('/', [ProductsController::class, 'userlogin']);
+    Route::get('/', [ProductsController::class, 'adlogin']);
+    Route::post('/', [ProductsController::class, 'adminlogin']);
 
     Route::group(['middleware' => ['admin']], function () {
-        Route::get('dashboard', [ProductsController::class, 'dashboard']);
+        Route::get('/dashboard', [ProductsController::class, 'dashboard']);
+        Route::get('/logouts', [ProductsController::class, 'logouts'])->name('logouts');
+        Route::get('logouts',[ProductsController::class,'logouts']);
+        Route::resource('dashboard/fashion',FashionController::class);
+        Route::resource('dashboard/electronic',ControllersElectronicController::class);
+        Route::resource('category',CategoryController::class);
+        Route::resource('sidebar',SidebarController::class);
     });
 });
 
@@ -69,12 +74,9 @@ Route::get('/sammob', function() {
 
 Route::resource('posts',PostController::class);
 Route::resource('posts2',Posts2Controller::class);
-Route::resource('dashboard/fashion',FashionController::class);
-Route::resource('dashboard/electronic',ControllersElectronicController::class);
-Route::resource('category',CategoryController::class);
-Route::resource('sidebar',SidebarController::class);
-Route::resource('/user/register',CusUserController::class);
-Route::get('index/register',[CusUserController::class,'show'])->name('index.register');
+
+// Route::resource('/user/register',CusUserController::class);
+// Route::get('/register',[UserC::class,'show'])->name('index.register');
 
 Route::get('index',[SubcatagoriesController::class,'getCategories']);
 Route::get('index/getSubcatagories/{id}',[SubcatagoriesController::class,'getSubcatagories']);
@@ -124,8 +126,8 @@ Route::delete('/cart/{productId}', [CartController::class,'removeFromCart'])->na
 
 
 
-// Route::get('index/login', [LoginController::class, 'showLoginForm'])->name('userlogin');
-// Route::post('index/login', [LoginController::class, 'userlogin']);
-// Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
-// Route::get('logout',[LoginController::class,'logout']);
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('userlogin');
+Route::post('index/login', [LoginController::class, 'userlogin']);
+Route::get('/logout', [LogoutController::class, 'logouts'])->name('logout');
+Route::get('logout',[LoginController::class,'logout']);
 require __DIR__.'/auth.php';

@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-warning btn-block"> Create Account  </button>
                             </div> <!-- form-group// -->
-                            {{-- <p class="text-center">Have an account? <a href="{{route('userlogin')}}">Log In</a> </p> --}}
+                            <p class="text-center">Have an account? <a href="{{route('userlogin')}}">Log In</a> </p>
                         </form>
                         </article>
                         </div> <!-- card.// -->
