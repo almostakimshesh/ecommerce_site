@@ -67,7 +67,9 @@ Route::group(['prefix' => '/'], function () {
 
 
 
-
+Route::get('/checkout',function(){
+    return view('frontend.checkout');
+});
 Route::get('/sammob', function() {
     return view('sammob');
 });

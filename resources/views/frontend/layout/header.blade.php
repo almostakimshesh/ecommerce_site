@@ -287,7 +287,7 @@
                     <td>{{ $item['total']}}</td>
                     <td>
                         <form action="{{ route('cart.remove', $productId) }}" method="POST">
-                            <a href="#" class="btn btn-info">Buy Now</a>
+                            <a href="{{url('checkout')}}" class="btn btn-info">Checkout</a>
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
