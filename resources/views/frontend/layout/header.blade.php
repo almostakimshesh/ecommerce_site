@@ -287,20 +287,24 @@
                     <td>{{ $item['total']}}</td>
                     <td>
                         <form action="{{ route('cart.remove', $productId) }}" method="POST">
-                            <a href="{{url('checkout')}}" class="btn btn-info">Checkout</a>
+
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
+
                   </tr>
+
                   @endforeach
+
                 </ul>
             @else
                 <p>Your cart is empty.</p>
             @endif
                 </tbody>
               </table>
+              <a href="{{url('checkout')}}" class="btn btn-info">Checkout</a>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

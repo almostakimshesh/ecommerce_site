@@ -52,7 +52,7 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-xl-8">
+            <div class="col-xl-7">
 
                 <div class="card">
                     <div class="card-body">
@@ -260,7 +260,29 @@
                     </div> <!-- end col -->
                 </div> <!-- end row-->
             </div>
-            <div class="col-xl-4">
+            {{-- @if (!empty(session()->get('cart')))
+            @foreach(session()->get('cart') as $productId  => $item)
+          <tr>
+            <th scope="row"><img src="{{ asset('/storage/blog/'.$item['image'])}}" alt="" width="100" height="100"></th>
+            <td>{{ $item['name'] }}</td>
+            <td>{{ $item['quantity'] }}</td>
+            <td>{{ $item['price'] }}</td>
+            <td>{{ $item['total']}}</td>
+            <td>
+                <form action="{{ route('cart.remove', $productId) }}" method="POST">
+                    <a href="{{url('checkout')}}" class="btn btn-info">Checkout</a>
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+          </tr>
+          @endforeach
+        </ul>
+    @else
+        <p>Your cart is empty.</p>
+    @endif --}}
+            <div class="col-xl-5">
                 <div class="card checkout-order-summary">
                     <div class="card-body">
                         <div class="p-3 bg-light mb-3">
@@ -276,44 +298,36 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if (!empty(session()->get('cart')))
+                                    @php
+                                    $grandTotal = 0;
+                                @endphp
+                                    @foreach(session()->get('cart') as $productId  => $item)
                                     <tr>
-                                        <th scope="row"><img src="https://www.bootdey.com/image/280x280/FF00FF/000000" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
+                                        <th scope="row"><img src="{{ asset('/storage/blog/'.$item['image'])}}" alt="" width="100" height="100"></th>
+
                                         <td>
-                                            <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark">Waterproof Mobile Phone</a></h5>
-                                            <p class="text-muted mb-0">
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star-half text-warning"></i>
-                                            </p>
-                                            <p class="text-muted mb-0 mt-1">$ 260 x 2</p>
+                                            <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark">{{ $item['name'] }}</a></h5>
+
+                                            <p class="text-muted mb-0 mt-1">{{ $item['price'] }} x {{ $item['quantity'] }}</p>
                                         </td>
-                                        <td>$ 520</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><img src="https://www.bootdey.com/image/280x280/FF00FF/000000" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
-                                        <td>
-                                            <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark">Smartphone Dual Camera</a></h5>
-                                            <p class="text-muted mb-0">
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                            </p>
-                                            <p class="text-muted mb-0 mt-1">$ 260 x 1</p>
-                                        </td>
-                                        <td>$ 260</td>
+                                        <td>{{ $item['price'] }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">
                                             <h5 class="font-size-14 m-0">Sub Total :</h5>
                                         </td>
                                         <td>
-                                            $ 780
+                                            {{ $item['total']}}
                                         </td>
                                     </tr>
-                                    <tr>
+                                    @php
+                                    $grandTotal = $grandTotal + $item['total'];
+                                @endphp
+                                    @endforeach
+
+                                    @endif
+                                    {{-- <tr>
                                         <td colspan="2">
                                             <h5 class="font-size-14 m-0">Discount :</h5>
                                         </td>
@@ -337,14 +351,14 @@
                                         <td>
                                             $ 18.20
                                         </td>
-                                    </tr>
+                                    </tr> --}}
 
                                     <tr class="bg-light">
                                         <td colspan="2">
                                             <h5 class="font-size-14 m-0">Total:</h5>
                                         </td>
                                         <td>
-                                            $ 745.2
+                                            {{ number_format($grandTotal, 2) }}
                                         </td>
                                     </tr>
                                 </tbody>
