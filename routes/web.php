@@ -13,6 +13,7 @@ use App\Http\Controllers\FashionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SidebarController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ElectronicController;
 use App\Http\Controllers\SubcatagoriesController;
 use App\Http\Controllers\frontend\JewelleryController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\ElectronicController as ControllersElectronicController
 use App\Http\Controllers\ProductsController;
 use Illuminate\Auth\Events\Login;
 use App\Http\Middleware\Admin;
+use App\Models\DeliveryAddress;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,9 +69,13 @@ Route::group(['prefix' => '/'], function () {
 
 
 
-Route::get('/checkout',function(){
-    return view('frontend.checkout');
-});
+// Route::get('/add_delivery_address',function(){
+//     return view('add_delivery_address');
+// });
+Route::resource('add_delivery_address',CheckoutController::class);
+Route::get('/checkout',[CartController::class,'checkout']);
+
+// Route::resource('checkout',DeliveryAddress::class);
 Route::get('/sammob', function() {
     return view('sammob');
 });

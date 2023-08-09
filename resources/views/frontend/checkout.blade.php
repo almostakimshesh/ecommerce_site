@@ -142,19 +142,26 @@
                                 <div class="feed-item-list">
                                     <div>
                                         <h5 class="font-size-16 mb-1">Shipping Info</h5>
-                                        <p class="text-muted text-truncate mb-4">Neque porro quisquam est</p>
+                                        <p class="text-muted text-truncate mb-4">                                        <div class="btn btn-primary"><a href="{{url('add_delivery_address')}}">Add Address</a></div></p>
+
                                         <div class="mb-3">
                                             <div class="row">
+
+
+                                                @foreach ($deliveryAddresses as $address)
                                                 <div class="col-lg-4 col-sm-6">
                                                     <div data-bs-toggle="collapse">
                                                         <label class="card-radio-label mb-0">
                                                             <input type="radio" name="address" id="info-address1" class="card-radio-input" checked="">
                                                             <div class="card-radio text-truncate p-3">
-                                                                <span class="fs-14 mb-4 d-block">Address 1</span>
-                                                                <span class="fs-14 mb-2 d-block">Bradley McMillian</span>
-                                                                <span class="text-muted fw-normal text-wrap mb-1 d-block">109 Clarksburg Park Road Show Low, AZ 85901</span>
+                                                                <span class="fs-14 mb-4 d-block">address: {{$address['id']}}</span>
 
-                                                                <span class="text-muted fw-normal d-block">Mo. 012-345-6789</span>
+                                                                <span class="fs-14 mb-2 d-block">{{$address['address']}}, {{$address['city']}} </span>
+                                                                <span class="text-muted fw-normal text-wrap mb-1 d-block">
+                                                                    {{$address['district']}},{{$address['division']}},{{$address['country']}}
+                                                                </span>
+
+                                                                <span class="text-muted fw-normal d-block">{{$address['mobile']}}</span>
                                                             </div>
                                                         </label>
                                                         <div class="edit-btn bg-light  rounded">
@@ -164,25 +171,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @endforeach
 
-                                                <div class="col-lg-4 col-sm-6">
-                                                    <div>
-                                                        <label class="card-radio-label mb-0">
-                                                            <input type="radio" name="address" id="info-address2" class="card-radio-input">
-                                                            <div class="card-radio text-truncate p-3">
-                                                                <span class="fs-14 mb-4 d-block">Address 2</span>
-                                                                <span class="fs-14 mb-2 d-block">Bradley McMillian</span>
-                                                                <span class="text-muted fw-normal text-wrap mb-1 d-block">109 Clarksburg Park Road Show Low, AZ 85901</span>
-                                                                <span class="text-muted fw-normal d-block">Mo. 012-345-6789</span>
-                                                            </div>
-                                                        </label>
-                                                        <div class="edit-btn bg-light  rounded">
-                                                            <a href="#" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Edit">
-                                                                <i class="bx bx-pencil font-size-16"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -326,7 +316,7 @@
                                 @endphp
                                     @endforeach
 
-                                    @endif
+
                                     {{-- <tr>
                                         <td colspan="2">
                                             <h5 class="font-size-14 m-0">Discount :</h5>
@@ -361,6 +351,7 @@
                                             {{ number_format($grandTotal, 2) }}
                                         </td>
                                     </tr>
+                                    @endif
                                 </tbody>
                             </table>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeliveryAddress;
 use Illuminate\Http\Request;
 use App\Models\fashion;
 
@@ -78,6 +79,13 @@ public function removeFromCart($productId)
         // If the product is not found in the cart, redirect back with an error message
         return redirect()->back()->with('error', 'Product not found in cart.');
     }
+}
+
+public function checkout()
+{
+    $deliveryAddresses = DeliveryAddress::delieryAddresses();
+
+    return view('frontend.checkout')->with(compact('deliveryAddresses'));
 }
 }
 
