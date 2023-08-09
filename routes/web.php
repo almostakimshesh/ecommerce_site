@@ -73,7 +73,7 @@ Route::group(['prefix' => '/'], function () {
 //     return view('add_delivery_address');
 // });
 Route::resource('add_delivery_address',CheckoutController::class);
-Route::get('/checkout',[CartController::class,'checkout']);
+Route::get('/checkout',[CartController::class,'checkout'])->name('checkout');
 
 // Route::resource('checkout',DeliveryAddress::class);
 Route::get('/sammob', function() {

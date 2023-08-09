@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DeliveryAddress;
-use Illuminate\Http\Request;
 use Validator;
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Models\DeliveryAddress;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
@@ -44,6 +46,8 @@ class CheckoutController extends Controller
 
 
     $address = new DeliveryAddress();
+    $address->user_id = Auth::user()->id;
+    $address->status = 1;
     $address->address = $request->address;
     $address->city = $request->city;
     $address->district = $request->district;
@@ -53,7 +57,7 @@ class CheckoutController extends Controller
     $address->mobile = $request->mobile;
     $address->save();
 
-    return $address;
+    return redirect()->route('checkout');
 }
 
 
