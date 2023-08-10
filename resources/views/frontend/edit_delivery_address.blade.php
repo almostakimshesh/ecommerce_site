@@ -66,7 +66,7 @@
                         <ol class="activity-checkout mb-0 px-4 mt-3">
                             <li class="checkout-item">
                                 <div class="avatar checkout-icon p-1">
-                                    <div class="avatar-title rounded-circle bg-primary">
+                                    <div class="avatar-title rounded-circle bg-info">
                                         <i class="bx bxs-receipt text-white font-size-20"></i>
                                     </div>
                                 </div>
@@ -75,22 +75,22 @@
                                         <h5 class="font-size-16 mb-1">Billing Info</h5>
                                         <p class="text-muted text-truncate mb-4">Sed ut perspiciatis unde omnis iste</p>
                                         <div class="mb-3">
-                                            <form action="{{ route('add_delivery_address.store')}}" method="POST" enctype="multipart/form-data">
+                                            <form action="{{route('add_delivery_address.update',$address['id'])}}" method="POST" enctype="multipart/form-data">
                                                 @csrf
-
+                                                @method('PUT')
                                                 <div>
                                                     <div class="row">
                                                         <div class="col-lg-4">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="billing-phone">Phone</label>
-                                                                <input name="mobile" type="text" class="form-control" id="billing-phone" placeholder="Enter Phone no.">
+                                                                <input name="mobile" type="text" value=" {{$address['mobile']}}" class="form-control" id="billing-phone" placeholder="Enter Phone no.">
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     <div class="mb-3">
                                                         <label class="form-label" for="billing-address">Address</label>
-                                                        <textarea name="address" class="form-control" id="billing-address" rows="3" placeholder="Enter full address"></textarea>
+                                                        <textarea name="address" value=" {{$address['address']}}" class="form-control" id="billing-address" rows="3" placeholder="Enter full address">{{$address['address']}}</textarea>
                                                     </div>
 
                                                     <div class="row">
@@ -113,40 +113,41 @@
                                                         <div class="col-lg-4">
                                                             <div class="mb-4 mb-lg-0">
                                                                 <label class="form-label" for="billing-city">Country</label>
-                                                                <input name="country" type="text" class="form-control" id="billing-city" placeholder="Enter Country">
+                                                                <input name="country" value=" {{$address['country']}}" type="text" class="form-control" id="billing-city" placeholder="Enter Country">
                                                             </div>
                                                         </div>
 
                                                         <div class="col-lg-4">
                                                             <div class="mb-4 mb-lg-0">
                                                                 <label class="form-label" for="billing-city">City</label>
-                                                                <input name="city" type="text" class="form-control" id="billing-city" placeholder="Enter City">
+                                                                <input name="city" value=" {{$address['city']}}" type="text" class="form-control" id="billing-city" placeholder="Enter City">
                                                             </div>
                                                         </div>
 
                                                         <div class="col-lg-4">
                                                             <div class="mb-4 mb-lg-0">
                                                                 <label class="form-label" for="billing-city">District</label>
-                                                                <input name="district" type="text" class="form-control" id="billing-city" placeholder="Enter District">
+                                                                <input name="district" value="{{$address['district']}}" type="text" class="form-control" id="billing-city" placeholder="Enter District">
                                                             </div>
                                                         </div>
 
                                                         <div class="col-lg-4">
                                                             <div class="mb-4 mb-lg-0">
                                                                 <label class="form-label" for="billing-city">Division</label>
-                                                                <input name="division" type="text" class="form-control" id="billing-city" placeholder="Enter Division">
+                                                                <input name="division" value=" {{$address['division']}}" type="text" class="form-control" id="billing-city" placeholder="Enter Division">
                                                             </div>
                                                         </div>
 
                                                         <div class="col-lg-4">
                                                             <div class="mb-0">
                                                                 <label class="form-label" for="zip-code">Zip / Postal code</label>
-                                                                <input name="pincode" type="text" class="form-control" id="zip-code" placeholder="Enter Postal code">
+                                                                <input name="pincode" value=" {{$address['pincode']}}" type="text" class="form-control" id="zip-code" placeholder="Enter Postal code">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary ml-3">Add Delivery Address</button>
+                                                </div><br>
+                                                <button type="submit" class="btn btn-info ml-3">Update Delivery Address</button>
+                                                <a href="{{route('checkout')}}"><button type="submit" class="btn btn-warning ml-3">Back</button></a>
                                             </form>
                                         </div>
                                     </div>

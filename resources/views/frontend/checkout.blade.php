@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="{{asset('frontend/css/checkout.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="fashion_section">
@@ -158,16 +159,22 @@
 
                                                                 <span class="fs-14 mb-2 d-block">{{$address['address']}}, {{$address['city']}} </span>
                                                                 <span class="text-muted fw-normal text-wrap mb-1 d-block">
-                                                                    {{$address['district']}},{{$address['division']}},{{$address['country']}}
+                                                                    {{$address['district']}},{{$address['division']}}<br>{{$address['country']}}
                                                                 </span>
 
                                                                 <span class="text-muted fw-normal d-block">{{$address['mobile']}}</span>
                                                             </div>
                                                         </label>
+
                                                         <div class="edit-btn bg-light  rounded">
-                                                            <a href="#" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Edit">
+                                                            <form action="{{route('add_delivery_address.destroy',$address['id'])}}" method="post">
+                                                            <a href="{{route('add_delivery_address.edit',$address['id'])}}" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Edit">
                                                                 <i class="bx bx-pencil font-size-16"></i>
                                                             </a>
+                                                            @csrf
+                                                            @method('DELETE')
+                                                          <button><i class="fa-solid fa-trash"></i></button>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -244,7 +251,7 @@
                     </div> <!-- end col -->
                     <div class="col">
                         <div class="text-end mt-2 mt-sm-0">
-                            <a href="#" class="btn btn-success">
+                            <a href="{{url('order')}}" class="btn btn-success">
                                 <i class="mdi mdi-cart-outline me-1"></i> Procced </a>
                         </div>
                     </div> <!-- end col -->

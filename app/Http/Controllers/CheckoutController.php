@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Validator;
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Models\DeliveryAddress;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
@@ -39,8 +38,8 @@ class CheckoutController extends Controller
             'district'=>'required',
             'division'=>'required',
             'country'=>'required',
-            'pincode'=>'required',
-            'mobile'=>'required|min:11'
+            'pincode'=>'required|digits:4',
+            'mobile'=>'required|min:11|numeric'
          ]);
 
 
@@ -72,24 +71,57 @@ class CheckoutController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(DeliveryAddress $deliveryAddress ,$id)
     {
-        //
+        $address = DeliveryAddress::find($id);
+        return view('frontend.edit_delivery_address',compact('address'));
+    }
+    public function add_delivery_address_edit($id)
+    {
+        $address = DeliveryAddress::find($id);
+        return view('frontend.edit_delivery_address',compact('address'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,  $id)
     {
-        //
+        $request->validate([
+
+            'address'=>'required',
+            'city'=>'required',
+            'district'=>'required',
+            'division'=>'required',
+            'country'=>'required',
+            'pincode'=>'required|digits:4',
+            'mobile'=>'required|min:11|numeric'
+    ]);
+
+    $address = DeliveryAddress::find($id);
+
+
+    $address->address = $request->address;
+    $address->city = $request->city;
+    $address->district = $request->district;
+    $address->division = $request->division;
+    $address->country = $request->country;
+    $address->pincode = $request->pincode;
+    $address->mobile = $request->mobile;
+    $address->save();
+
+    return redirect()->route('checkout')->with('success','Delivery address updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(DeliveryAddress $deliveryAddress , $id)
+
     {
-        //
+        $address = DeliveryAddress::find($id );
+
+        $address->delete();
+        return redirect()->route('checkout')->with('success','Post has been deleted successfully');
     }
 }

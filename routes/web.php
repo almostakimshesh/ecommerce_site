@@ -46,6 +46,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/order',function(){
+        return view('frontend.order');
+    });
+    Route::resource('add_delivery_address',CheckoutController::class);
+    Route::get('/checkout',[CartController::class,'checkout'])->name('checkout');
 
 });
 
@@ -66,14 +71,6 @@ Route::group(['prefix' => '/'], function () {
     });
 });
 
-
-
-
-// Route::get('/add_delivery_address',function(){
-//     return view('add_delivery_address');
-// });
-Route::resource('add_delivery_address',CheckoutController::class);
-Route::get('/checkout',[CartController::class,'checkout'])->name('checkout');
 
 // Route::resource('checkout',DeliveryAddress::class);
 Route::get('/sammob', function() {

@@ -13,18 +13,18 @@
 				</div>
 			</div>
 		</div>
-	
+
 		@if(session('status'))
 		<div class="alert alert-success mb-1 mt-1">
 			{{session('status')}}
 		</div>
 		@endif
-	
+
 		<form action="{{route('posts.update',$post->id)}}" method="post" enctype="multipart/form-data">
-	
+
 			@csrf
 			@method('PUT')
-	
+
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12">
 					<div class="form-group">
@@ -37,7 +37,7 @@
 						@enderror
 					</div>
 				</div>
-	
+
 				<div class="col-xs-12 col-sm-12 col-md-12">
 					<div class="form-group">
 						<b>Post Description:</b>
@@ -49,7 +49,7 @@
 						@enderror
 					</div>
 				</div>
-	
+
 				<div class="col-xs-12 col-sm-12 col-md-12">
 					<div class="form-group">
 						<b>Post Image:</b>
@@ -60,16 +60,16 @@
 						</div>
 						@enderror
 					</div>
-	
+
 					<div class="form-group">
 						<img src="{{ asset('/storage/blog/'.$post->image)}}" height="200" width="200" alt="">
 					</div>
 				</div>
-	
+
 				<button type="submit" class="btn btn-primary" ml-3>Update</button>
-	
+
 			</div>
-			
+
 		</form>
 	</div>
 </div>

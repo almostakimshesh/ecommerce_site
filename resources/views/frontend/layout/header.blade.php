@@ -46,10 +46,11 @@
 
 <style>
     td{
-        text-align: center
+        text-align: center;
     }
  th{
-    text-align: center
+    text-align: center;
+
  }
 </style>
 <script>
@@ -136,7 +137,7 @@
                      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                      <a href="/index">Home</a>
                      @foreach ($categories as $category)
-                        <a style="text-transform: capitalize;" href="{{$category->categoryname}}">{{$category->categoryname}}</a>
+                        <a style="text-transform: capitalize;" href="/{{$category->categoryname}}">{{$category->categoryname}}</a>
                      @endforeach
                   </div>
                   <span class="toggle_icon" onclick="openNav()"><img src="{{asset('frontend/images/toggle-icon.png')}}"></span>
@@ -265,9 +266,11 @@
           </button>
         </div>
         <div class="modal-body">
+
             <table class="table table-hover">
                 <thead>
                   <tr>
+                    <th scope="col"></th>
                     <th scope="col">IMAGE</th>
                     <th scope="col">NAME</th>
                     <th scope="col">QUANTITY</th>
@@ -280,12 +283,18 @@
                     @if (!empty(session()->get('cart')))
                     @foreach(session()->get('cart') as $productId  => $item)
                   <tr>
-                    <th scope="row"><img src="{{ asset('/storage/blog/'.$item['image'])}}" alt="" width="100" height="100"></th>
-                    <td>{{ $item['name'] }}</td>
-                    <td>{{ $item['quantity'] }}</td>
-                    <td>{{ $item['price'] }}</td>
-                    <td>{{ $item['total']}}</td>
-                    <td>
+                    {{-- <form action="{{route('checkout',$fashion->id)}}" method="POST">
+                        @csrf --}}
+                        <td><input name="checkoutid" type="checkbox"></td>
+                    <td scope="row">
+
+                        <img src="{{ asset('/storage/blog/'.$item['image'])}}" alt="" width="100" height="100">
+                    </td>
+                        <td class="">{{ $item['name'] }}</td>
+                        <td>{{ $item['quantity'] }}</td>
+                        <td>{{ $item['price'] }}</td>
+                        <td>{{ $item['total']}}</td>
+                        <td>
                         <form action="{{ route('cart.remove', $productId) }}" method="POST">
 
                             @csrf
@@ -293,15 +302,15 @@
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
-
+                </form>
                   </tr>
 
                   @endforeach
 
-                </ul>
-            @else
-                <p>Your cart is empty.</p>
-            @endif
+                    </ul>
+                    @else
+                        <p>Your cart is empty.</p>
+                    @endif
                 </tbody>
               </table>
               <a href="{{url('checkout')}}" class="btn btn-info">Checkout</a>
