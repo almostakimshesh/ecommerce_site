@@ -46,11 +46,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/order',function(){
+    Route::post('/order',function(){
         return view('frontend.order');
     });
     Route::resource('add_delivery_address',CheckoutController::class);
-    Route::get('/checkout',[CartController::class,'checkout'])->name('checkout');
+
+
+    Route::get('add_delivery_address/destroy/{id}', [CheckoutController::class, 'destroy']);
+
+    Route::match(array('GET', 'POST'),'/checkout',[CartController::class,'sendCart'])->name('checkout');
+    // Route::post('/check',[CartController::class,'checkout2'])->name('checkout2');
 
 });
 
@@ -121,7 +126,7 @@ Route::get('/test',[CategoryController::class,'test']);
 Route::post('/add/cart/{id}', [Cart::class, 'addToCart'])->name('add.cart');
 Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
 // routes/web.php
-Route::delete('/cart/{productId}', [CartController::class,'removeFromCart'])->name('cart.remove');
+Route::get('/cart/{productId}', [CartController::class,'removeFromCart'])->name('cart.remove');
 
 
 

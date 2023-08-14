@@ -54,7 +54,7 @@
 
         <div class="row">
             <div class="col-xl-7">
-
+                <form name="checkoutForm" action="{{url('order')}}" method="post">
                 <div class="card">
                     <div class="card-body">
                         <ol class="activity-checkout mb-0 px-4 mt-3">
@@ -143,45 +143,43 @@
                                 <div class="feed-item-list">
                                     <div>
                                         <h5 class="font-size-16 mb-1">Shipping Info</h5>
-                                        <p class="text-muted text-truncate mb-4">                                        <div class="btn btn-primary"><a href="{{url('add_delivery_address')}}">Add Address</a></div></p>
+                                        <p class="text-muted text-truncate mb-4">
+                                        <div class="btn btn-primary"><a href="{{url('add_delivery_address')}}">Add Address</a></div></p>
 
-                                        <div class="mb-3">
-                                            <div class="row">
+                                        {{-- <div class="mb-3">
 
+                                                @csrf
+                                                <div class="row">
+                                                    @foreach ($deliveryAddresses as $address)
+                                                    <div class="col-lg-4 col-sm-6">
+                                                        <div data-bs-toggle="collapse">
+                                                            <label class="card-radio-label mb-0">
+                                                                <input type="radio" name="address_id" id="{{$address['id']}}" class="card-radio-input" value="{{$address['id']}}" checked="">
+                                                                <div class="card-radio text-truncazte p-3">
+                                                                    <span class="fs-14 mb-4 d-block">address: {{$address['id']}}</span>
 
-                                                @foreach ($deliveryAddresses as $address)
-                                                <div class="col-lg-4 col-sm-6">
-                                                    <div data-bs-toggle="collapse">
-                                                        <label class="card-radio-label mb-0">
-                                                            <input type="radio" name="address" id="info-address1" class="card-radio-input" checked="">
-                                                            <div class="card-radio text-truncate p-3">
-                                                                <span class="fs-14 mb-4 d-block">address: {{$address['id']}}</span>
+                                                                    <span class="fs-14 mb-2 d-block">{{$address['address']}}, {{$address['city']}} </span>
+                                                                    <span class="text-muted fw-normal text-wrap mb-1 d-block">
+                                                                        {{$address['district']}},{{$address['division']}}<br>{{$address['country']}}
+                                                                    </span>
 
-                                                                <span class="fs-14 mb-2 d-block">{{$address['address']}}, {{$address['city']}} </span>
-                                                                <span class="text-muted fw-normal text-wrap mb-1 d-block">
-                                                                    {{$address['district']}},{{$address['division']}}<br>{{$address['country']}}
-                                                                </span>
+                                                                    <span class="text-muted fw-normal d-block">{{$address['mobile']}}</span>
+                                                                </div>
+                                                            </label>
 
-                                                                <span class="text-muted fw-normal d-block">{{$address['mobile']}}</span>
+                                                            <div class="edit-btn bg-light  rounded">
+
+                                                                <a href="{{route('add_delivery_address.edit',$address['id'])}}" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Edit">
+                                                                    <i class="bx bx-pencil font-size-16"></i>
+                                                                </a>
+                                                              <a href="{{url('add_delivery_address/destroy',$address['id'])}}"><i class="fa-solid fa-trash"></i></a>
                                                             </div>
-                                                        </label>
-
-                                                        <div class="edit-btn bg-light  rounded">
-                                                            <form action="{{route('add_delivery_address.destroy',$address['id'])}}" method="post">
-                                                            <a href="{{route('add_delivery_address.edit',$address['id'])}}" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Edit">
-                                                                <i class="bx bx-pencil font-size-16"></i>
-                                                            </a>
-                                                            @csrf
-                                                            @method('DELETE')
-                                                          <button><i class="fa-solid fa-trash"></i></button>
-                                                            </form>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                @endforeach
+                                                    @endforeach
 
-                                            </div>
-                                        </div>
+                                                </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </li>
@@ -202,7 +200,7 @@
                                             <div class="col-lg-3 col-sm-6">
                                                 <div data-bs-toggle="collapse">
                                                     <label class="card-radio-label">
-                                                        <input type="radio" name="pay-method" id="pay-methodoption1" class="card-radio-input">
+                                                        <input type="radio" name="pay-method" id="pay-methodoption1" class="card-radio-input" value="Prepaid">
                                                         <span class="card-radio py-3 text-center text-truncate">
                                                             <i class="bx bx-credit-card d-block h2 mb-3"></i>
                                                             Credit / Debit Card
@@ -214,7 +212,7 @@
                                             <div class="col-lg-3 col-sm-6">
                                                 <div>
                                                     <label class="card-radio-label">
-                                                        <input type="radio" name="pay-method" id="pay-methodoption2" class="card-radio-input">
+                                                        <input type="radio" name="pay-method" id="pay-methodoption2" class="card-radio-input" value="Prepaid">
                                                         <span class="card-radio py-3 text-center text-truncate">
                                                             <i class="bx bxl-paypal d-block h2 mb-3"></i>
                                                             Paypal
@@ -226,7 +224,7 @@
                                             <div class="col-lg-3 col-sm-6">
                                                 <div>
                                                     <label class="card-radio-label">
-                                                        <input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" checked="">
+                                                        <input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" checked="" value="COD">
 
                                                         <span class="card-radio py-3 text-center text-truncate">
                                                             <i class="bx bx-money d-block h2 mb-3"></i>
@@ -249,36 +247,15 @@
                         <a href="{{route('index')}}" class="btn btn-link text-muted">
                             <i class="mdi mdi-arrow-left me-1"></i> Continue Shopping </a>
                     </div> <!-- end col -->
-                    <div class="col">
-                        <div class="text-end mt-2 mt-sm-0">
-                            <a href="{{url('order')}}" class="btn btn-success">
-                                <i class="mdi mdi-cart-outline me-1"></i> Procced </a>
-                        </div>
-                    </div> <!-- end col -->
+                        <div class="col">
+                            <div class="text-end mt-2 mt-sm-0">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="mdi mdi-cart-outline me-1"></i> Procced </button>
+                            </div>
+                        </div> <!-- end col -->
+                    </form>
                 </div> <!-- end row-->
             </div>
-            {{-- @if (!empty(session()->get('cart')))
-            @foreach(session()->get('cart') as $productId  => $item)
-          <tr>
-            <th scope="row"><img src="{{ asset('/storage/blog/'.$item['image'])}}" alt="" width="100" height="100"></th>
-            <td>{{ $item['name'] }}</td>
-            <td>{{ $item['quantity'] }}</td>
-            <td>{{ $item['price'] }}</td>
-            <td>{{ $item['total']}}</td>
-            <td>
-                <form action="{{ route('cart.remove', $productId) }}" method="POST">
-                    <a href="{{url('checkout')}}" class="btn btn-info">Checkout</a>
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-            </td>
-          </tr>
-          @endforeach
-        </ul>
-    @else
-        <p>Your cart is empty.</p>
-    @endif --}}
             <div class="col-xl-5">
                 <div class="card checkout-order-summary">
                     <div class="card-body">
@@ -294,12 +271,13 @@
                                         <th class="border-top-0" scope="col">Price</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @if (!empty(session()->get('cart')))
+                                {{-- <tbody>
+                                    @if (!empty(session()->get('item')))
                                     @php
                                     $grandTotal = 0;
-                                @endphp
-                                    @foreach(session()->get('cart') as $productId  => $item)
+                                    @endphp
+                                    @foreach(session()->get('item') as  $item)
+                                    @dd(asset('/storage/blog/'.$item['image']))
                                     <tr>
                                         <th scope="row"><img src="{{ asset('/storage/blog/'.$item['image'])}}" alt="" width="100" height="100"></th>
 
@@ -320,11 +298,10 @@
                                     </tr>
                                     @php
                                     $grandTotal = $grandTotal + $item['total'];
-                                @endphp
+                                    @endphp
                                     @endforeach
 
-
-                                    {{-- <tr>
+                                     <tr>
                                         <td colspan="2">
                                             <h5 class="font-size-14 m-0">Discount :</h5>
                                         </td>
@@ -348,7 +325,7 @@
                                         <td>
                                             $ 18.20
                                         </td>
-                                    </tr> --}}
+                                    </tr>
 
                                     <tr class="bg-light">
                                         <td colspan="2">
@@ -359,6 +336,12 @@
                                         </td>
                                     </tr>
                                     @endif
+                                </tbody> --}}
+                                <tbody>
+                                    @foreach($sessionDataArray as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+
                                 </tbody>
                             </table>
 
@@ -368,6 +351,6 @@
             </div>
         </div>
         <!-- end row -->
-    </div>
+    </div></div></div></div></div>
 </body>
 </html>

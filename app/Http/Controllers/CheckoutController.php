@@ -33,12 +33,12 @@ class CheckoutController extends Controller
     {
 
         $request->validate([
-            'address'=>'required',
-            'city'=>'required',
-            'district'=>'required',
-            'division'=>'required',
-            'country'=>'required',
-            'pincode'=>'required|digits:4',
+            'address'=>'required|regex:/^[\pL\s\-]+$/u',
+            'city'=>'required|regex:/^[\pL\s\-]+$/u',
+            'district'=>'required|regex:/^[\pL\s\-]+$/u',
+            'division'=>'required|regex:/^[\pL\s\-]+$/u',
+            'country'=>'required|regex:/^[\pL\s\-]+$/u',
+            'pincode'=>'required|digits:4|numeric',
             'mobile'=>'required|min:11|numeric'
          ]);
 
@@ -89,12 +89,12 @@ class CheckoutController extends Controller
     {
         $request->validate([
 
-            'address'=>'required',
-            'city'=>'required',
-            'district'=>'required',
-            'division'=>'required',
-            'country'=>'required',
-            'pincode'=>'required|digits:4',
+            'address'=>'required|regex:/^[\pL\s\-]+$/u',
+            'city'=>'required|regex:/^[\pL\s\-]+$/u',
+            'district'=>'required|regex:/^[\pL\s\-]+$/u',
+            'division'=>'required|regex:/^[\pL\s\-]+$/u',
+            'country'=>'required|regex:/^[\pL\s\-]+$/u',
+            'pincode'=>'required|digits:4|numeric',
             'mobile'=>'required|min:11|numeric'
     ]);
 
@@ -122,6 +122,6 @@ class CheckoutController extends Controller
         $address = DeliveryAddress::find($id );
 
         $address->delete();
-        return redirect()->route('checkout')->with('success','Post has been deleted successfully');
+        return redirect()->route('checkout')->with('success','Address has been deleted successfully');
     }
 }

@@ -32,6 +32,7 @@ class CartController extends Controller
         } else {
             // If the product is not in the cart, add it as a new item
             $cart[$id] = [
+                'id' =>$fashion->id,
                 'name' => $fashion->title,
                 'quantity' => $quantity,
                 'price' => $fashion->price,
@@ -81,11 +82,63 @@ public function removeFromCart($productId)
     }
 }
 
-public function checkout()
+public function sendCart(Request $request)
 {
-    $deliveryAddresses = DeliveryAddress::delieryAddresses();
+    if ($request->isMethod('post')) {
+        $sendCart = $request->input('cat', []); // Provide an empty array as default
 
-    return view('frontend.checkout')->with(compact('deliveryAddresses'));
+        // Store the cart data in the session
+
+        // Retrieve the stored session data as an array
+        $sessionDataArray = session()->get('form_data', []);
+
+
+
+
+        session()->put('form_data', $sendCart);
+        print_r( session()->get('form_data', []));
+        return view('frontend.checkout',compact('sessionDataArray'));
+    }
+}
+
+
+
+
+public function checkout(Request $request){
+    if($request->isMethod('post'))
+    {
+        $data = $request->all();
+        //  return $data;
+        // if($data['pay-method']=="COD"){
+        //     $pay = "COD";
+        // }
+        // else{
+        //     $pay = "Prepaid";
+        // }
+        // $deliveryAddresses = DeliveryAddress::where('id',$data['address_id'])->first()->toArray();
+        // dd($deliveryAddresses);
+
+    // }
+    //     if($request->isMethod('post'))
+    // {
+    //     $sendCart = $request->all();
+
+    //            session()->put('item', $sendCart);
+    //     $new = session()->get('item');
+        // dd($new);
+
+//        session()->put('item', $sendCart);
+//         $new = session()->get('item');
+// dd($new);
+    }
+
+        $sendCart = $request->all('cat');
+        // $new = session()->get('item');
+        $deliveryAddresses = DeliveryAddress::delieryAddresses();
+        return view('frontend.checkout',compact('deliveryAddresses','sendCart'));//,'new'
+
+
 }
 }
+
 

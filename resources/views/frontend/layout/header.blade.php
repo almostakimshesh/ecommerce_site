@@ -267,54 +267,55 @@
         </div>
         <div class="modal-body">
 
-            <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col"></th>
-                    <th scope="col">IMAGE</th>
-                    <th scope="col">NAME</th>
-                    <th scope="col">QUANTITY</th>
-                    <th scope="col">PRICE</th>
-                    <th scope="col">TOTAL PRICE</th>
-                    <th scope="col">ACTION</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    @if (!empty(session()->get('cart')))
-                    @foreach(session()->get('cart') as $productId  => $item)
-                  <tr>
-                    {{-- <form action="{{route('checkout',$fashion->id)}}" method="POST">
-                        @csrf --}}
-                        <td><input name="checkoutid" type="checkbox"></td>
-                    <td scope="row">
-
-                        <img src="{{ asset('/storage/blog/'.$item['image'])}}" alt="" width="100" height="100">
-                    </td>
-                        <td class="">{{ $item['name'] }}</td>
-                        <td>{{ $item['quantity'] }}</td>
-                        <td>{{ $item['price'] }}</td>
-                        <td>{{ $item['total']}}</td>
-                        <td>
-                        <form action="{{ route('cart.remove', $productId) }}" method="POST">
-
+        <form action="{{route('checkout')}}" method="POST">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">IMAGE</th>
+                        <th scope="col">NAME</th>
+                        <th scope="col">QUANTITY</th>
+                        <th scope="col">PRICE</th>
+                        <th scope="col">TOTAL PRICE</th>
+                        <th scope="col">ACTION</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @if (!empty(session()->get('cart')))
+                        @foreach(session()->get('cart') as $productId  => $item)
+                        <tr>
                             @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
-                </form>
-                  </tr>
+                            <td>
+                                <input name="cat[]" type="checkbox" value="{{ asset('/storage/blog/'.$item['image']) }}|{{ $item['name'] }}|{{ $item['quantity'] }}|{{ $item['price'] }}|{{ $item['total'] }}" checked>
+                                <td scope="row">
 
-                  @endforeach
+                                    <img src="{{ asset('/storage/blog/'.$item['image'])}}" alt="" width="100" height="100">
+                                </td>
+                                <td class="">{{ $item['name'] }}</td>
+                                <td>{{ $item['quantity'] }}</td>
+                                <td>{{ $item['price'] }}</td>
+                                <td>{{ $item['total']}}</td>
+                                <td>
+                                    <a href="{{ route('cart.remove', $productId) }}"  class="btn btn-danger">delete</a>
+
+                                </td>
+                        </td>
+                    </tr>
+
+                    @endforeach
 
                     </ul>
                     @else
                         <p>Your cart is empty.</p>
                     @endif
-                </tbody>
-              </table>
-              <a href="{{url('checkout')}}" class="btn btn-info">Checkout</a>
-        </div>
+                    </tbody>
+                </table>
+            <button class="btn btn-info">Checkout</button>
+            {{-- href="{{route('checkout',$fashion->id)}}" --}}
+        </form>
+      </div>
+
+
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
