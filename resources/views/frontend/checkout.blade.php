@@ -146,7 +146,7 @@
                                         <p class="text-muted text-truncate mb-4">
                                         <div class="btn btn-primary"><a href="{{url('add_delivery_address')}}">Add Address</a></div></p>
 
-                                        {{-- <div class="mb-3">
+                                        <div class="mb-3">
 
                                                 @csrf
                                                 <div class="row">
@@ -179,7 +179,7 @@
                                                     @endforeach
 
                                                 </div>
-                                        </div> --}}
+                                        </div>
                                     </div>
                                 </div>
                             </li>
@@ -200,7 +200,7 @@
                                             <div class="col-lg-3 col-sm-6">
                                                 <div data-bs-toggle="collapse">
                                                     <label class="card-radio-label">
-                                                        <input type="radio" name="pay-method" id="pay-methodoption1" class="card-radio-input" value="Prepaid">
+                                                        <input type="radio" name="payment" id="pay-methodoption1" class="card-radio-input" value="Prepaid">
                                                         <span class="card-radio py-3 text-center text-truncate">
                                                             <i class="bx bx-credit-card d-block h2 mb-3"></i>
                                                             Credit / Debit Card
@@ -212,7 +212,7 @@
                                             <div class="col-lg-3 col-sm-6">
                                                 <div>
                                                     <label class="card-radio-label">
-                                                        <input type="radio" name="pay-method" id="pay-methodoption2" class="card-radio-input" value="Prepaid">
+                                                        <input type="radio" name="payment" id="pay-methodoption2" class="card-radio-input" value="Prepaid">
                                                         <span class="card-radio py-3 text-center text-truncate">
                                                             <i class="bx bxl-paypal d-block h2 mb-3"></i>
                                                             Paypal
@@ -224,7 +224,7 @@
                                             <div class="col-lg-3 col-sm-6">
                                                 <div>
                                                     <label class="card-radio-label">
-                                                        <input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" checked="" value="COD">
+                                                        <input type="radio" name="payment" id="pay-methodoption3" class="card-radio-input" checked="" value="COD">
 
                                                         <span class="card-radio py-3 text-center text-truncate">
                                                             <i class="bx bx-money d-block h2 mb-3"></i>
@@ -271,13 +271,13 @@
                                         <th class="border-top-0" scope="col">Price</th>
                                     </tr>
                                 </thead>
-                                {{-- <tbody>
-                                    @if (!empty(session()->get('item')))
+                                <tbody>
+                                    @if (!empty($cartData))
                                     @php
                                     $grandTotal = 0;
                                     @endphp
-                                    @foreach(session()->get('item') as  $item)
-                                    @dd(asset('/storage/blog/'.$item['image']))
+                                    @foreach($cartData as  $item)
+                                    {{-- @dd(asset('/storage/blog/'.$item['image'])) --}}
                                     <tr>
                                         <th scope="row"><img src="{{ asset('/storage/blog/'.$item['image'])}}" alt="" width="100" height="100"></th>
 
@@ -301,32 +301,6 @@
                                     @endphp
                                     @endforeach
 
-                                     <tr>
-                                        <td colspan="2">
-                                            <h5 class="font-size-14 m-0">Discount :</h5>
-                                        </td>
-                                        <td>
-                                            - $ 78
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td colspan="2">
-                                            <h5 class="font-size-14 m-0">Shipping Charge :</h5>
-                                        </td>
-                                        <td>
-                                            $ 25
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <h5 class="font-size-14 m-0">Estimated Tax :</h5>
-                                        </td>
-                                        <td>
-                                            $ 18.20
-                                        </td>
-                                    </tr>
-
                                     <tr class="bg-light">
                                         <td colspan="2">
                                             <h5 class="font-size-14 m-0">Total:</h5>
@@ -336,12 +310,6 @@
                                         </td>
                                     </tr>
                                     @endif
-                                </tbody> --}}
-                                <tbody>
-                                    @foreach($sessionDataArray as $item)
-                                    <li>{{ $item }}</li>
-                                @endforeach
-
                                 </tbody>
                             </table>
 
