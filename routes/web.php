@@ -18,6 +18,8 @@ use App\Http\Controllers\ElectronicController;
 use App\Http\Controllers\SubcatagoriesController;
 use App\Http\Controllers\frontend\JewelleryController;
 use App\Http\Controllers\ElectronicController as ControllersElectronicController;
+use App\Http\Controllers\OrdersController;
+
 use App\Http\Controllers\ProductsController;
 use Illuminate\Auth\Events\Login;
 use App\Http\Middleware\Admin;
@@ -50,6 +52,8 @@ Route::middleware('auth')->group(function () {
     //     return view('frontend.order');
     // });
     Route::post('/order' , [CartController::class, 'order'])->name('order');
+    Route::get('myorder', [OrdersController::class, 'orders'])->name('myorder');
+    Route::get('order/{id}', [OrdersController::class, 'orderDetails'])->name('orderDetails');
     Route::resource('add_delivery_address',CheckoutController::class);
 
 

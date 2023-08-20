@@ -13,7 +13,7 @@
     pointer-events: none;
 }
 </style>
-   
+
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
@@ -52,6 +52,16 @@
                                     </li>
                                 </ul>
                         </li>
+                        <li class=" has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-tachometer-alt"></i>Orders</a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                    <li class=" has-sub">
+                                        <a href="{{url('orders')}}">
+                                            <i class="far fa-check-square"></i>order</a>
+                                    </li>
+                                </ul>
+                        </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-desktop"></i>Brands</a>
@@ -66,7 +76,7 @@
                                         </button>
                 <ul name="subcategories" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                           <li><a class="dropdown-item text-center" href=""></a></li>
-                                          
+
                                         </ul>
                                       </div>
                                 @endforeach
@@ -111,10 +121,9 @@
                      jQuery(this).find('ul[name="subcategories"]').empty();
                   }
                });
-               
+
                jQuery('ul[name="cat"] li').on('mouseleave', function() {
                   jQuery(this).find('ul[name="subcategories"]').empty();
                });
             });
          </script>
-         

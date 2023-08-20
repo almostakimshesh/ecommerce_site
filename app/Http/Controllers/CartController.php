@@ -108,7 +108,18 @@ public function checkout(Request $request) {
         }
 
     }
+else{
+    $cart = Session::get('cart');
+    if ($cart) {
+        $cartData = Session::get('cart');
+        // return $cartData;
+        $deliveryAddresses = DeliveryAddress::delieryAddresses();
+        return redirect()->route('order');
+    } else {
+        return "Cart data not found in session.";
+    }
 
+}
 
         // if($data["payment"]=="COD"){
         //     $pay = "COD";
@@ -184,15 +195,36 @@ public function order( Request $request)
         $order_id = DB::getPdo()->lastInsertId();
 
         $cartItems = $cartData;
-        foreach($cartItem as $ke => $item){
+        foreach($cartItems as $key => $item){
             $cartItem = new OrdersProduct;
             $cartItem->order_id = $order_id;
-            $cartProducts = Auth::user()->id;
+            $cartItem->user_id = Auth::user()->id;
+            $getProductDetails = fashion::select('title')->where('id',$item['id'])->first()->toArray();
+            $cartItem->product_id = $item['id'];
+            $cartItem->product_name = $item['name'];
+            $cartItem->product_price = $item['price'];
+            $cartItem->product_qty = $item['quantity'];
+            $cartItem ->save();
         }
-       return view('frontend.order',compact('deliveryAddresses','pay','cartData'));
+        $orders = Order::with('orders_products')->where('user_id',Auth::user()->id)->get()->toArray();
+        // dd($orders);
+        // return view('frontend.order',compact('orders'));
+        // $cartItems = Session::forget('cart');
+    //    return redirect('/myorder',compact('deliveryAddresses','pay','cartItems','orders'));
+       return redirect()->route('myorder')->with(compact('deliveryAddresses','pay','cartItems','orders'));
+
+
+    //    ->wiih(compact('deliveryAddresses','pay','cartItems','orders'))
+       // dd($orders);
+
         // dd($cartData,$deliveryAddresses,$pay);
     }
+    else{
+        return redirect()->route('myorder');
+
+    }
 }
+
 }
 
 

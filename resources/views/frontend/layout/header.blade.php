@@ -98,7 +98,7 @@
                         <ul>
                             <li><a href="#">New Releases</a></li>
                             <li><a href="#">Today's Deals</a></li>
-                            <li><a href="">Customer Service</a></li>
+                            <li><a href="{{url('myorder')}}">My Orders</a></li>
                             <li title="user"><a href="{{url('/profile')}}"><b class="text-capitalize">{{ Auth::user()->name}}</b></a></li>
                             <li><a href="{{url('/logout')}}">Logout</a></li>
                         </ul>
