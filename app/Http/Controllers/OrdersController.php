@@ -17,8 +17,8 @@ class OrdersController extends Controller
     public function orderDetails($id)
     {
         $orderDetails = Order::with('order_details')->where('id',$id)->first()->toArray();
-
-        dd($orderDetails);
+        // dd($orderDetails);
+        return view('frontend.order_details',compact('orderDetails'));
 
     }
 }
