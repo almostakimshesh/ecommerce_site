@@ -57,7 +57,7 @@
                                 <i class="fas fa-tachometer-alt"></i>Orders</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                     <li class=" has-sub">
-                                        <a href="{{url('orders')}}">
+                                        <a href="{{url('dashboard/orders')}}">
                                             <i class="far fa-check-square"></i>order</a>
                                     </li>
                                 </ul>

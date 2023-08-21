@@ -45,7 +45,9 @@
                                         </td>
                                         <td class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                             <form action="">
-                                                <a class="btn btn-outline-danger" href="{{url('/order/'.$order['id'])}}" role="button">details</a>
+                                                <a href="{{url('/order/'.$order['id'])}}" class="btn btn-outline-danger">
+                                                    details
+                                                </a>
                                             </form>
                                         </td>
                                     </tr>
@@ -55,6 +57,29 @@
                             @endforeach
                               {{-- <div class="card shadow-0 border mb-4">
                                 <div class="card-body">
+                                  <div class="row">
+                                    @foreach (session()->get('cart') as $productId  => $item)
+                                    <div class="col-md-2">
+                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/13.webp"
+                                          class="img-fluid" alt="Phone">
+                                      </div>
+                                    @endforeach
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                      <p class="text-muted mb-0">Samsung Galaxy</p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                      <p class="text-muted mb-0 small">White</p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                      <p class="text-muted mb-0 small">Capacity: 64GB</p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                      <p class="text-muted mb-0 small">Qty: 1</p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                      <p class="text-muted mb-0 small">$499</p>
+                                    </div>
+                                  </div>
                                   <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
                                   <div class="row d-flex align-items-center">
                                     <div class="col-md-2">
@@ -75,6 +100,28 @@
                                 </div>
                               </div> --}}
                               {{-- <div class="card shadow-0 border mb-4">
+                                <div class="card-body">
+                                  <div class="row">
+                                    <div class="col-md-2">
+                                      <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/1.webp"
+                                        class="img-fluid" alt="Phone">
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                      <p class="text-muted mb-0">iPad</p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                      <p class="text-muted mb-0 small">Pink rose</p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                      <p class="text-muted mb-0 small">Capacity: 32GB</p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                      <p class="text-muted mb-0 small">Qty: 1</p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                      <p class="text-muted mb-0 small">$399</p>
+                                    </div>
+                                  </div>
                                   <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
                                   <div class="row d-flex align-items-center">
                                     <div class="col-md-2">
@@ -95,24 +142,24 @@
                                 </div>
                               </div> --}}
 
-                              <div class="d-flex justify-content-between pt-2">
+                              {{-- <div class="d-flex justify-content-between pt-2">
                                 <p class="fw-bold mb-0">Order Details</p>
                                 <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span> {{ $order['grand_total'] }}</p>
                               </div>
                               <div class="d-flex justify-content-between pt-2">
-                                <p class="text-muted mb-0">Invoice Number : {{$product['order_id']}} </p>
+                                <p class="text-muted mb-0">Invoice Number : 788152</p>
                                 <p class="text-muted mb-0"><span class="fw-bold me-4">Discount</span> $19.00</p>
                               </div>
 
                               <div class="d-flex justify-content-between">
-                                <p class="text-muted mb-0">Invoice Date : {{date('d-m-Y',strtotime($order['created_at'])) }}</p>
+                                <p class="text-muted mb-0">Invoice Date : 22 Dec,2019</p>
                                 <p class="text-muted mb-0"><span class="fw-bold me-4">GST 18%</span> 123</p>
                               </div>
 
                               <div class="d-flex justify-content-between mb-5">
                                 <p class="text-muted mb-0">Recepits Voucher : 18KU-62IIK</p>
                                 <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span> Free</p>
-                              </div>
+                              </div> --}}
                             </div>
                             <div class="card-footer border-0 px-4 py-5"
                               style="background-color: #a8729a; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
@@ -129,7 +176,6 @@
 
 </div>
 @endforeach
-
 @endsection
 
 

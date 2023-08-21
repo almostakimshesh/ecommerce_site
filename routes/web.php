@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminordersController;
 use App\Models\Category;
 use App\Http\Controllers\Cart;
 use Illuminate\Support\Facades\Route;
@@ -74,6 +75,9 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/dashboard', [ProductsController::class, 'dashboard']);
         Route::get('/logouts', [ProductsController::class, 'logouts'])->name('logouts');
         Route::get('logouts',[ProductsController::class,'logouts']);
+        Route::get('dashboard/orders',[AdminordersController::class,'orders']);
+        Route::get('dashboard/orders/{id}',[AdminordersController::class,'orderDetails']);
+        Route::post('update_order_status',[AdminordersController::class,'updateOrderStatus']);
         Route::resource('dashboard/fashion',FashionController::class);
         Route::resource('dashboard/electronic',ControllersElectronicController::class);
         Route::resource('category',CategoryController::class);
