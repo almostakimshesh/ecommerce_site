@@ -26,6 +26,15 @@ class AdminordersController extends Controller
     }
     public function updateOrderStatus(Request $request)
     {
+        if($request->isMethod('post'))
+        {
+            $data = $request->all();
+            // echo '<pre>';
+            // print_r($data);
+            Order::where('id',$data['order_id'])->update(['order_status'=>$data['order_status']]);
+            return redirect()->back()->with('success','Order Status has been updated successfully');
+            // dd(Session::put('success','Order Status has ben updated Successfully'));
 
+        }
     }
 }

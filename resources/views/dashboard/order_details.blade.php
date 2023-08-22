@@ -23,6 +23,11 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        @if($message=Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{$message}}</p>
+        </div>
+        @endif
         <div class="row">
           <div class="col-md-6">
             <div class="card">
@@ -108,7 +113,11 @@
               <div class="card-body p-0">
                 <table class="table table-striped table-hover table-bordered">
                     <tr>
-                        <td colspan="2"><strong>Billing Address</strong></td>
+                        <td colspan="2"><strong>User Details</strong></td>
+                    </tr>
+                    <tr>
+                        <td>User id</td>
+                        <td>{{$userDetails['id']}}</td>
                     </tr>
                     <tr>
                         <td>Name</td>
@@ -118,34 +127,34 @@
                         <td>Email</td>
                         <td>{{$userDetails['email']}}</td>
                     </tr>
-                    <tr>
-                        <td>Address</td>
-                        {{-- <td>{{$Details['address']}}</td> --}}
+                    {{-- <tr>
+                        <td>Mobile</td>
+                        <td>{{$userDetails['mobile']}}</td>
                     </tr>
                     <tr>
                         <td>City</td>
-                        {{-- <td>{{$Details['city']}}</td> --}}
+                        <td>{{$Details['city']}}</td>
                     </tr>
                     <tr>
                         <td>District</td>
-                        {{-- <td>{{$Details['district']}}</td> --}}
+                        <td>{{$Details['district']}}</td>
                     </tr>
                     <tr>
                         <td>Division</td>
-                        {{-- <td>{{$Details['division']}}</td> --}}
+                        <td>{{$Details['division']}}</td>
                     </tr>
                     <tr>
                         <td>Country</td>
-                        {{-- <td>{{$Details['country']}}</td> --}}
+                        <td>{{$Details['country']}}</td>
                     </tr>
                     <tr>
                         <td>Pincode</td>
-                        {{-- <td>{{$Details['pincode']}}</td> --}}
+                        <td>{{$Details['pincode']}}</td>
                     </tr>
                     <tr>
                         <td>Mobile</td>
-                        {{-- <td>{{$Details['mobile']}}</td> --}}
-                    </tr>
+                        <td>{{$Details['mobile']}}</td>
+                    </tr> --}}
                 </table>
               </div>
               <!-- /.card-body -->
@@ -153,18 +162,25 @@
             <!-- /.card -->
             <div class="card">
                 <div class="card-header">
-                </div>
                     <strong  class="card-title">Update Order Status</strong>
+                </div>
                 <div class="card-body">
                   <table class="table table-striped table-hover table-bordered">
                       <tr>
                           <td colspan="2" style="text-align: center;">
-                            <form action="{{url('update_order_status')}}" method="post"> @csrf
+                            <form action="{{url('update_order_status')}}" method="post">
+                                @csrf
                                 <input type="hidden" name="order_id" value="{{$orderDetails['id']}}">
                                 <select name="order_status" id="" style="padding: 2%;" required>
                                     <option value="" >Select status</option>
                                     @foreach ($orderStatus as $status)
-                                        <option value="">{{$status['name']}}</option>
+                                        <option value="{{$status['name']}}"
+                                            @if(isset($orderDetails['order_status']) && $orderDetails['order_status']==$status['name']) selected=""
+                                            @endif >
+                                            @if(isset($orderDetails['order_status']) && $orderDetails['order_status'] == $status['name']) &#10004;
+                                            @endif
+                                            {{$status['name']}}
+                                        </option>
                                     @endforeach
                                 </select>&nbsp;&nbsp;
                                 <button class="btn btn-outline-dark">Submit</button>

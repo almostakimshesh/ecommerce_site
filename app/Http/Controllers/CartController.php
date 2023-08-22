@@ -9,6 +9,7 @@ use App\Models\OrdersProduct;
 use App\Models\DeliveryAddress;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -206,6 +207,21 @@ public function order( Request $request)
             $cartItem->product_qty = $item['quantity'];
             $cartItem ->save();
         }
+        $orderDetails = Order::with('orders_products')->where('id',$order_id)->first ()->toArray();
+        if($data['payment']=="COD"){
+            $email = Auth::user()->email;
+            $messageData = [
+                'email' => $email,
+                'name' => Auth::user()->name,
+                'order_id' => $order_id,
+                'orderDetails' => $orderDetails,
+            ];
+            Mail::send('emails.orders',$messageData,function($message)use($email){
+                $message->to($email)->subject('Order Place - heyMostakim');
+            });
+        }else{
+            echo "dfsfsd";
+        }
         $orders = Order::with('orders_products')->where('user_id',Auth::user()->id)->get()->toArray();
         // dd($orders);
         // return view('frontend.order',compact('orders'));
@@ -224,6 +240,13 @@ public function order( Request $request)
 
     }
 }
+
+// public static function getProductImage($product_id)
+// {
+//         $deliveryAddresses = DeliveryAddress::where('id',$data['address_id'])->first()->toArray();
+//         $product_image = fashion::select('image')->where('id',$product_id)->first()->toArray();
+//     return $product_image;
+// }
 
 }
 

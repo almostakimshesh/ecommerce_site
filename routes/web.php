@@ -149,4 +149,7 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('userlogin
 Route::post('index/login', [LoginController::class, 'userlogin']);
 Route::get('/logout', [LogoutController::class, 'logouts'])->name('logout');
 Route::get('logout',[LoginController::class,'logout']);
+
+
+// Route::get('test',[CartController::class, 'getProductImage']);
 require __DIR__.'/auth.php';
