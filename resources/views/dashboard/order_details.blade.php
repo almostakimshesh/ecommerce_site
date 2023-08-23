@@ -6,6 +6,12 @@
         margin: 0 auto;
         text-align: center;
     }
+    #new{
+        text-align: center;
+    }
+    .new{
+        text-align: center;
+    }
 </style>
 <div class="main-content">
     <div class="section__content section__content--p30">
@@ -61,46 +67,46 @@
             <div class="card">
               <!-- /.card-header -->
               <div class="card-body p-0">
-                <table class="table table-striped table-hover table-bordered">
-                    <tr>
-                        <td colspan="2"><strong>Delivery Address</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Name</td>
-                        <td>{{$orderDetails['name']}}</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>{{$orderDetails['email']}}</td>
-                    </tr>
-                    <tr>
-                        <td>Address</td>
-                        <td>{{$orderDetails['address']}}</td>
-                    </tr>
-                    <tr>
-                        <td>City</td>
-                        <td>{{$orderDetails['city']}}</td>
-                    </tr>
-                    <tr>
-                        <td>District</td>
-                        <td>{{$orderDetails['district']}}</td>
-                    </tr>
-                    <tr>
-                        <td>Division</td>
-                        <td>{{$orderDetails['division']}}</td>
-                    </tr>
-                    <tr>
-                        <td>Country</td>
-                        <td>{{$orderDetails['country']}}</td>
-                    </tr>
-                    <tr>
-                        <td>Pincode</td>
-                        <td>{{$orderDetails['pincode']}}</td>
-                    </tr>
-                    <tr>
-                        <td>Mobile</td>
-                        <td>{{$orderDetails['mobile']}}</td>
-                    </tr>
+                <table id="new" class="table table-striped table-hover table-bordered">
+                        <tr>
+                            <td colspan="2"><strong>Delivery Address</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Name</td>
+                            <td>{{$orderDetails['name']}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{{$orderDetails['email']}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>{{$orderDetails['address']}}</td>
+                        </tr>
+                        <tr>
+                            <td>City</td>
+                            <td>{{$orderDetails['city']}}</td>
+                        </tr>
+                        <tr>
+                            <td>District</td>
+                            <td>{{$orderDetails['district']}}</td>
+                        </tr>
+                        <tr>
+                            <td>Division</td>
+                            <td>{{$orderDetails['division']}}</td>
+                        </tr>
+                        <tr>
+                            <td>Country</td>
+                            <td>{{$orderDetails['country']}}</td>
+                        </tr>
+                        <tr>
+                            <td>Pincode</td>
+                            <td>{{$orderDetails['pincode']}}</td>
+                        </tr>
+                        <tr>
+                            <td>Mobile</td>
+                            <td>{{$orderDetails['mobile']}}</td>
+                        </tr>
                 </table>
               </div>
               <!-- /.card-body -->
@@ -111,7 +117,7 @@
           <div class="col-md-6">
             <div class="card">
               <div class="card-body p-0">
-                <table class="table table-striped table-hover table-bordered">
+                <table id="new" class="table table-striped table-hover table-bordered">
                     <tr>
                         <td colspan="2"><strong>User Details</strong></td>
                     </tr>
@@ -200,9 +206,9 @@
             <div class="card">
               <div class="card-body table-responsive p-0"> {{--class="table table-hover text-nowrap"--}}
                 <table class="table table-striped table-hover table-bordered">
-                    <thead>
+                    <thead id="new">
                         <tr>
-                        <th scope="col">Product Image</th>
+                        <th scope="col" >Product Image</th>
                         <th scope="col">Product Name</th>
                         <th scope="col">Product Quantity</th>
                         <th scope="col">Product Price ( Per piece)</th>
@@ -210,8 +216,10 @@
                     </thead>
                     @foreach ($orderDetails['orders_products'] as $product)
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
+                            <tr id="new">
+                                <th scope="row">
+                                    <img src="{{ asset('/storage/blog/' . $product['image']) }}" alt="Product Image" width="50" height="50">
+                                </th>
                                 <td>{{$product['product_name']}}</td>
                                 <td>{{$product['product_qty']}}</td>
                                 <td>{{$product['product_price']}} Taka</td>

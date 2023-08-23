@@ -13,6 +13,11 @@
                           <div class="card" style="border-radius: 10px;">
                             <div class="card-header px-4 py-5">
                               <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;">{{Auth::user()->name}}</span>!</h5>
+                              @if($message=Session::get('success'))
+                              <div class="alert alert-success">
+                                  <p>{{$message}}</p>
+                              </div>
+                              @endif
                             </div>
                             <div class="card-body p-4">
                               <div class="d-flex justify-content-between align-items-center mb-4">

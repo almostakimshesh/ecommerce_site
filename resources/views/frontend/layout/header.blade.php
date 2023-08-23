@@ -96,6 +96,7 @@
                      <div class="custom_menu">
                         @if (Auth::user())
                         <ul>
+                            <li><a href="{{route('index')}}">Home</a></li>
                             <li><a href="#">New Releases</a></li>
                             <li><a href="#">Today's Deals</a></li>
                             <li><a href="{{url('myorder')}}">My Orders</a></li>
@@ -104,6 +105,7 @@
                         </ul>
                     @else
                         <ul>
+                            <li><a href="{{route('index')}}">Home</a></li>
                             <li><a href="#">New Releases</a></li>
                             <li><a href="#">Today's Deals</a></li>
                             <li><a href="">Customer Service</a></li>

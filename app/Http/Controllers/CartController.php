@@ -203,6 +203,7 @@ public function order( Request $request)
             $getProductDetails = fashion::select('title')->where('id',$item['id'])->first()->toArray();
             $cartItem->product_id = $item['id'];
             $cartItem->product_name = $item['name'];
+            $cartItem->image = $item['image'];
             $cartItem->product_price = $item['price'];
             $cartItem->product_qty = $item['quantity'];
             $cartItem ->save();
@@ -217,7 +218,7 @@ public function order( Request $request)
                 'orderDetails' => $orderDetails,
             ];
             Mail::send('emails.orders',$messageData,function($message)use($email){
-                $message->to($email)->subject('Order Place - heyMostakim');
+                $message->to($email)->subject('Order Place - hey!','name');
             });
         }else{
             echo "dfsfsd";
@@ -227,7 +228,7 @@ public function order( Request $request)
         // return view('frontend.order',compact('orders'));
         // $cartItems = Session::forget('cart');
     //    return redirect('/myorder',compact('deliveryAddresses','pay','cartItems','orders'));
-       return redirect()->route('myorder')->with(compact('deliveryAddresses','pay','cartItems','orders'));
+       return redirect()->route('myorder')->with('success','Mail has been sent to your given mail address',compact('deliveryAddresses','pay','cartItems','orders'));
 
 
     //    ->wiih(compact('deliveryAddresses','pay','cartItems','orders'))

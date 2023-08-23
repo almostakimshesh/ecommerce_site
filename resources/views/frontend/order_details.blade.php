@@ -93,10 +93,12 @@
                                 @foreach ($orderDetails['orders_products'] as $product)
                                     <tbody>
                                         <tr>
-                                            <th scope="row">1</th>
+                                            <th scope="row">
+                                                <img src="{{ asset('/storage/blog/' . $product['image']) }}" alt="Product Image" width="50" height="50">
+                                            </th>
                                             <td>{{$product['product_name']}}</td>
                                             <td>{{$product['product_qty']}}</td>
-                                            <td>{{$product['product_price']}}</td>
+                                            <td>{{$product['product_price']}} Taka</td>
                                         </tr>
                                     </tbody>
                                 @endforeach
